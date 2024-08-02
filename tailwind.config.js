@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ['./index.html', './src/**/*.{js,jsx}'],
+  content: ['./index.html', './src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     screens: {
       sm: '480px',
@@ -48,8 +48,8 @@ export default {
       xl: '1rem',
       '2xl': '1.25rem',
       '3xl': '1.5rem',
-      '4xl': '1.875rem',
-      '5xl': '2.375rem',
+      '4xl': '1.75rem',
+      '5xl': '2rem',
     },
     extend: {},
   },
