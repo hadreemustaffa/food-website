@@ -1,4 +1,3 @@
-import React from 'react';
 import { ButtonIcon, ButtonPrimary } from './Buttons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faSearch } from '@fortawesome/free-solid-svg-icons';
@@ -26,7 +25,7 @@ export const Header = () => {
         </div>
       </div>
 
-      <div className="relative">
+      <div>
         <picture>
           <source
             media="(min-width: 768px)"
@@ -38,10 +37,14 @@ export const Header = () => {
             srcSet="./hero-image-desktop.jpg"
             type="image/jpg"
           />
-          <img src="./hero-image-mobile.jpg" alt="" />
+          <img
+            className="mix-blend-difference"
+            src="./hero-image-mobile.jpg"
+            alt=""
+          />
         </picture>
 
-        <div className="flex flex-col items-start gap-4 p-4">
+        <div className="flex flex-col items-start bg-black-950 bg-opacity-80 gap-4 p-4">
           <h1 className="font-sans font-bold text-5xl">
             Quick & Easy Delights
           </h1>
