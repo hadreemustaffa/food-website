@@ -7,21 +7,26 @@ import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 import { Profile } from './pages/Profile';
 import { NotFound } from './pages/NotFound';
+import { Header } from './components/Header';
 
 function App() {
   return (
     <>
       <BrowserRouter>
+        <Header />
+
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/explore" element={<Explore />} />
-          <Route path="/recipe" element={<Recipe />} />
+          <Route path="/recipe/:recipeId" element={<Recipe />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/:userId" element={<Profile />} />
           <Route path="/404" element={<NotFound />} />
           <Route path="*" element={<Navigate to="/404" replace />} />
         </Routes>
+
+        {/* <Footer /> */}
       </BrowserRouter>
     </>
   );
