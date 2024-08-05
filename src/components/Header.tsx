@@ -14,14 +14,13 @@ export const Header = () => {
         </a>
 
         <div className="flex flex-row gap-4">
-          <ButtonIcon
-            onClick={handleSearch}
-            children={<FontAwesomeIcon icon={faSearch} />}
-          />
-          <ButtonIcon
-            onClick={handleToggle}
-            children={<FontAwesomeIcon icon={faBars} />}
-          />
+          <ButtonIcon onClick={handleSearch}>
+            <FontAwesomeIcon icon={faSearch} className="text-tomato-200" />
+          </ButtonIcon>
+
+          <ButtonIcon onClick={handleToggle}>
+            <FontAwesomeIcon icon={faBars} className="text-tomato-200" />
+          </ButtonIcon>
         </div>
       </div>
 
@@ -44,8 +43,8 @@ export const Header = () => {
           />
         </picture>
 
-        <div className="flex flex-col items-start bg-black-950 bg-opacity-80 gap-4 p-4">
-          <h1 className="font-sans font-bold text-5xl">
+        <div className="flex flex-col items-start bg-black-950 bg-opacity-80 gap-4 px-4 py-6">
+          <h1 className="font-sans font-bold text-5xl leading-none">
             Quick & Easy Delights
           </h1>
 
