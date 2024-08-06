@@ -1,35 +1,44 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ButtonIcon } from './Buttons';
-import { RecipeCardWithButton } from './RecipeCard';
-import { faArrowsRotate } from '@fortawesome/free-solid-svg-icons';
+import { Button } from './Button';
+import { RecipeCardDetailed } from './RecipeCard';
 
 export const RandomRecipe = () => {
-  const detail = {
-    name: 'Tomato Pizza',
-    score: 95,
-    readyTime: '15m',
-    serveAmount: 3,
-    calorieAmount: 700,
+  // const [recipe, setRecipe] = useState([]);
+  // useEffect(() => {
+  //   // getRandomRecipesInformation().then((data) => setRecipes(data));
+  // }, []);
+
+  // sample data
+  const recipe = {
+    id: 58693,
+    title: 'Whole Wheat Spaghetti with Basil Avocado Pesto',
+    spoonacularScore: 92,
+    readyInMinutes: 10,
+    servings: 4,
+    nutrition: {
+      nutrients: [
+        {
+          amount: 286,
+        },
+      ],
+    },
   };
 
   return (
     <div className="flex flex-col gap-4">
-      <h2 className="text-4xl font-sans font-bold">Random</h2>
+      <div className="flex flex-row justify-between">
+        <h2 className="text-4xl font-sans font-bold">Random</h2>
+        <Button variant="secondary" value="Get New Recipe" />
+      </div>
       <div className="flex flex-col gap-4">
-        <RecipeCardWithButton
-          name={detail.name}
-          score={detail.score}
-          readyTime={detail.readyTime}
-          serveAmount={detail.serveAmount}
-          calorieAmount={detail.calorieAmount}
-        >
-          <ButtonIcon onClick={() => alert('clicked')}>
-            <FontAwesomeIcon
-              icon={faArrowsRotate}
-              className="text-tomato-200"
-            />
-          </ButtonIcon>
-        </RecipeCardWithButton>
+        <div className="flex flex-col md:flex-row rounded-sm overflow-hidden">
+          <RecipeCardDetailed
+            name={recipe.title}
+            score={Math.floor(recipe.spoonacularScore)}
+            readyTime={recipe.readyInMinutes}
+            serveAmount={recipe.servings}
+            calorieAmount={Math.floor(recipe.nutrition.nutrients[0].amount)}
+          />
+        </div>
       </div>
     </div>
   );
