@@ -1,5 +1,5 @@
-export interface RecipeProps {
-  id: number;
+export interface RecipeDetailedProps {
+  id?: number;
   title: string;
   spoonacularScore: number;
   readyInMinutes: number;
@@ -11,4 +11,9 @@ export interface RecipeProps {
       }
     ];
   };
+}
+export interface RecipeMinimalProps {
+  id: number;
+  title: string;
+  image: string;
 }

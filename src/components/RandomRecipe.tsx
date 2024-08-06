@@ -1,27 +1,27 @@
+import { useEffect, useState } from 'react';
 import { Button } from './Button';
 import { RecipeCardDetailed } from './RecipeCard';
+import { getRandomRecipe } from '../api/getRecipeData';
+import { RecipeDetailedProps } from '../interfaces';
 
 export const RandomRecipe = () => {
-  // const [recipe, setRecipe] = useState([]);
-  // useEffect(() => {
-  //   // getRandomRecipesInformation().then((data) => setRecipes(data));
-  // }, []);
-
-  // sample data
-  const recipe = {
-    id: 58693,
-    title: 'Whole Wheat Spaghetti with Basil Avocado Pesto',
-    spoonacularScore: 92,
-    readyInMinutes: 10,
-    servings: 4,
+  const [recipe, setRecipe] = useState<RecipeDetailedProps>({
+    title: '',
+    spoonacularScore: 0,
+    readyInMinutes: 0,
+    servings: 0,
     nutrition: {
       nutrients: [
         {
-          amount: 286,
+          amount: 0,
         },
       ],
     },
-  };
+  });
+
+  useEffect(() => {
+    getRandomRecipe().then((data) => setRecipe(data));
+  }, []);
 
   return (
     <div className="flex flex-col gap-4">

@@ -6,6 +6,11 @@ interface RecipeCardDetailedProps {
   calorieAmount: number;
 }
 
+interface RecipeCardMinimalProps {
+  name: string;
+  imagePath: string;
+}
+
 export const RecipeCardDetailed = ({
   name,
   score,
@@ -43,10 +48,13 @@ export const RecipeCardDetailed = ({
   );
 };
 
-export const RecipeCardMinimal = ({ name }: { name: string }) => {
+export const RecipeCardMinimal = ({
+  name,
+  imagePath,
+}: RecipeCardMinimalProps) => {
   return (
     <div className="flex flex-col rounded-sm overflow-hidden">
-      <img className="h-56" src="./hero-image-mobile.jpg" alt="" />
+      <img className="h-56" src={imagePath} alt="" />
       <div className="flex flex-col bg-black-950 gap-2 p-4">
         <a href="#" className="text-3xl font-bold hover:underline">
           {name}

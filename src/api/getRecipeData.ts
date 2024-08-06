@@ -5,8 +5,10 @@ const API_KEY = import.meta.env.VITE_API_KEY;
 
 export async function getRandomRecipe() {
   try {
-    const response = await axios.get(`${BASE_URL}/recipes/random?apiKey=${API_KEY}`)
-    return response;
+    const response: AxiosResponse = await axios.get(`${BASE_URL}/recipes/random?apiKey=${API_KEY}`)
+    return response.data.recipes;
+    // console.log(response.data.recipes);
+    
   } catch (error) {
     console.log(error);
   }
@@ -14,7 +16,7 @@ export async function getRandomRecipe() {
 
 const getFeaturedRecipesId = async() => {
   try {
-    const response: AxiosResponse = await axios.get(`${BASE_URL}/recipes/complexSearch?apiKey=${API_KEY}&instructionsRequired=true&fillIngredients=false&addRecipeInformation=false&addRecipeNutrition=false&maxReadyTime=20&ignorePantry=false&sort=meta-score&sortDirection=desc&number=2&limitLicense=true`)
+    const response: AxiosResponse = await axios.get(`${BASE_URL}/recipes/complexSearch?apiKey=${API_KEY}&instructionsRequired=true&fillIngredients=false&addRecipeInformation=false&addRecipeNutrition=false&maxReadyTime=20&ignorePantry=false&sort=meta-score&sortDirection=desc&number=6&limitLicense=true`)
     return response.data.results;
   } catch (error) {
     console.log(error);
@@ -31,5 +33,14 @@ export const getFeaturedRecipesInformation = async () => {
   } catch (error) {
     console.log(error);
     
+  }
+}
+
+export const getRecommendedRecipesId = async () => {
+  try {
+    const response: AxiosResponse = await axios.get(`${BASE_URL}/recipes/complexSearch?apiKey=${API_KEY}&instructionsRequired=true&fillIngredients=false&addRecipeInformation=false&addRecipeNutrition=false&ignorePantry=false&number=6&limitLicense=true`)
+    return response.data.results;
+  } catch (error) {
+    console.log(error);
   }
 }
