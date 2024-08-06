@@ -27,7 +27,7 @@ export const Featured = () => {
               score={Math.floor(recipe.spoonacularScore)}
               readyTime={recipe.readyInMinutes}
               serveAmount={recipe.servings}
-              calorieAmount={Math.floor(recipe.nutrition.nutrients[0].amount)}
+              imagePath={recipe.image}
             />
           </li>
         ))}

@@ -3,7 +3,7 @@ interface RecipeCardDetailedProps {
   score: number;
   readyTime: number;
   serveAmount: number;
-  calorieAmount: number;
+  imagePath: string;
 }
 
 interface RecipeCardMinimalProps {
@@ -16,11 +16,11 @@ export const RecipeCardDetailed = ({
   score,
   readyTime,
   serveAmount,
-  calorieAmount,
+  imagePath,
 }: RecipeCardDetailedProps) => {
   return (
     <>
-      <img className="h-56" src="./hero-image-mobile.jpg" alt="" />
+      <img className="h-56" src={imagePath} alt="" />
       <div className="flex flex-col bg-black-950 gap-2 p-4">
         <a href="#" className="text-3xl font-bold hover:underline">
           {name}
@@ -37,10 +37,6 @@ export const RecipeCardDetailed = ({
           <div className="flex flex-col gap-1">
             <p className="text-sm text-black-100">Serves</p>
             <p>{serveAmount}</p>
-          </div>
-          <div className="flex flex-col gap-1">
-            <p className="text-sm text-black-100">Calorie</p>
-            <p>{calorieAmount}</p>
           </div>
         </div>
       </div>
