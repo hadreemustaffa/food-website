@@ -5,22 +5,14 @@ import { getRandomRecipe } from '../api/getRecipeData';
 import { RecipeDetailedProps } from '../interfaces';
 
 export const RandomRecipe = () => {
-  const [recipe, setRecipe] = useState<RecipeDetailedProps>({
-    title: '',
-    spoonacularScore: 0,
-    readyInMinutes: 0,
-    servings: 0,
-    nutrition: {
-      nutrients: [
-        {
-          amount: 0,
-        },
-      ],
-    },
-  });
+  const [recipe, setRecipe] = useState<RecipeDetailedProps>(
+    {} as RecipeDetailedProps
+  );
 
   useEffect(() => {
-    getRandomRecipe().then((data) => setRecipe(data));
+    getRandomRecipe()
+      .then((data) => setRecipe(data))
+      .catch((error) => console.log(error));
   }, []);
 
   return (
@@ -36,7 +28,7 @@ export const RandomRecipe = () => {
             score={Math.floor(recipe.spoonacularScore)}
             readyTime={recipe.readyInMinutes}
             serveAmount={recipe.servings}
-            calorieAmount={Math.floor(recipe.nutrition.nutrients[0].amount)}
+            imagePath={recipe.image}
           />
         </div>
       </div>
