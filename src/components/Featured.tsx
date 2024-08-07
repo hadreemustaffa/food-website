@@ -1,23 +1,15 @@
-import { useEffect, useState } from 'react';
+import { lazy, Suspense } from 'react';
 import { getFeaturedRecipesInformation } from '../api/getRecipeData';
+
 import { RecipeCardDetailed } from './RecipeCard';
 import { RecipeDetailedProps } from '../interfaces';
+import { CardListLoader } from './Skeleton';
 
-export const Featured = () => {
-  const [recipes, setRecipes] = useState([]);
-
-  useEffect(() => {
-    // getFeaturedRecipesInformation().then((data) => setRecipes(data));
-    // fetch('./data.json')
-    //   .then((response) => response.json())
-    //   .then((data) => setRecipes(data));
-  }, []);
-
-  return (
-    <div className="flex flex-col gap-4">
-      <h2 className="text-4xl font-sans font-bold">Featured</h2>
-      <div className="flex flex-col gap-4">
-        {recipes.map((recipe: RecipeDetailedProps) => (
+const CardList = lazy(() =>
+  getFeaturedRecipesInformation().then((data) => {
+    return {
+      default: () => {
+        const listItems = data.map((recipe: RecipeDetailedProps) => (
           <li
             key={recipe.id}
             className="flex flex-col rounded-sm overflow-hidden"
@@ -30,8 +22,21 @@ export const Featured = () => {
               imagePath={recipe.image}
             />
           </li>
-        ))}
-      </div>
+        ));
+
+        return <ul className="flex flex-col gap-4">{listItems}</ul>;
+      },
+    };
+  })
+);
+
+export const Featured = () => {
+  return (
+    <div className="flex flex-col gap-4">
+      <h2 className="text-4xl font-sans font-bold">Featured</h2>
+      <Suspense fallback={<CardListLoader variant="detailed" />}>
+        <CardList />
+      </Suspense>
     </div>
   );
 };
