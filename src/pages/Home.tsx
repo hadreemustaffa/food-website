@@ -45,8 +45,8 @@ export const Home = () => {
       </div>
 
       <div className="flex flex-col gap-6 p-4">
-        <Featured />
         <RandomRecipe />
+        <Featured />
         <Recommended />
       </div>
     </>
