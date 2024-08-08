@@ -39,3 +39,12 @@ export const getPopularSectionRecipesId = async () => {
     console.log(error);
   }
 }
+
+export const getExploreRecipesId = async () => {
+  try {
+    const response: AxiosResponse = await axios.get(`${BASE_URL}/recipes/random?apiKey=${API_KEY}&number=8`)
+    return response.data.recipes;
+  } catch (error) {
+    console.log(error);
+  }
+}
