@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
+
 import { Button } from '../../components/Button';
-import { FeaturedSection } from './FeaturedSection';
 import { RandomRecipe } from './RandomRecipe';
+import { FeaturedSection } from './FeaturedSection';
 import { PopularSection } from './PopularSection';
 
 export const Home = () => {

@@ -27,7 +27,7 @@ export const Button = ({ value, variant, children, ...props }: ButtonProps) => {
     return (
       <button
         {...props}
-        className=" border-2 border-black-400 hover:border-black-300 border-solid rounded-sm py-2 px-4"
+        className="w-fit border-2 border-black-400 hover:border-black-300 border-solid rounded-sm py-2 px-4"
       >
         {value}
       </button>

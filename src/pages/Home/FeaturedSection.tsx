@@ -11,7 +11,11 @@ const CardList = lazy(() =>
       default: () => {
         const listItems = data.map((recipe: RecipeMinimalProps) => (
           <li key={recipe.id}>
-            <RecipeCardMinimal name={recipe.title} imagePath={recipe.image} />
+            <RecipeCardMinimal
+              id={recipe.id}
+              name={recipe.title}
+              imagePath={recipe.image}
+            />
           </li>
         ));
 

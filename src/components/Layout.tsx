@@ -5,7 +5,7 @@ export const Layout = () => {
   return (
     <>
       <Header />
-      <main className="flex flex-col">
+      <main className="flex flex-col gap-6">
         <Outlet />
       </main>
 
