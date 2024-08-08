@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { getRandomRecipe } from '../api/getRecipeData';
+import { getRandomRecipe } from '../../api/getRecipeData';
 
-import { Button } from './Button';
-import { RecipeCardDetailed } from './RecipeCard';
-import { RecipeDetailedProps } from '../interfaces';
+import { Button } from '../../components/Button';
+import { RecipeCardDetailed } from '../../components/RecipeCard';
+import { RecipeDetailedProps } from '../../interfaces';
 
 export const RandomRecipe = () => {
   const [recipe, setRecipe] = useState<RecipeDetailedProps>({
@@ -39,15 +39,13 @@ export const RandomRecipe = () => {
         />
       </div>
       <div className="flex flex-col gap-4">
-        <div className="flex flex-col md:flex-row rounded-sm overflow-hidden">
-          <RecipeCardDetailed
-            name={recipe.title}
-            score={Math.floor(recipe.spoonacularScore)}
-            readyTime={recipe.readyInMinutes}
-            serveAmount={recipe.servings}
-            imagePath={recipe.image}
-          />
-        </div>
+        <RecipeCardDetailed
+          name={recipe.title}
+          score={Math.floor(recipe.spoonacularScore)}
+          readyTime={recipe.readyInMinutes}
+          serveAmount={recipe.servings}
+          imagePath={recipe.image}
+        />
       </div>
     </div>
   );

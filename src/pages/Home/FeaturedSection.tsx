@@ -1,19 +1,16 @@
 import { lazy, Suspense } from 'react';
-import { getFeaturedRecipesId } from '../api/getRecipeData';
+import { getFeaturedSectionRecipesId } from '../../api/getRecipeData';
 
-import { RecipeCardMinimal } from './RecipeCard';
-import { RecipeMinimalProps } from '../interfaces';
-import { CardListLoader } from './Skeleton';
+import { RecipeCardMinimal } from '../../components/RecipeCard';
+import { RecipeMinimalProps } from '../../interfaces';
+import { CardListLoader } from '../../components/Skeleton';
 
 const CardList = lazy(() =>
-  getFeaturedRecipesId().then((data) => {
+  getFeaturedSectionRecipesId().then((data) => {
     return {
       default: () => {
         const listItems = data.map((recipe: RecipeMinimalProps) => (
-          <li
-            key={recipe.id}
-            className="flex flex-col rounded-sm overflow-hidden"
-          >
+          <li key={recipe.id}>
             <RecipeCardMinimal name={recipe.title} imagePath={recipe.image} />
           </li>
         ));
@@ -24,7 +21,7 @@ const CardList = lazy(() =>
   })
 );
 
-export const Featured = () => {
+export const FeaturedSection = () => {
   return (
     <div className="flex flex-col gap-4">
       <h2 className="text-4xl font-sans font-bold">Featured</h2>

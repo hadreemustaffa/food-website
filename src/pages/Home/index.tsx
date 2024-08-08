@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
-import { Button } from '../components/Button';
-import { Featured } from '../components/Featured';
-import { RandomRecipe } from '../components/RandomRecipe';
-import { Recommended } from '../components/Recommended';
+import { Button } from '../../components/Button';
+import { FeaturedSection } from './FeaturedSection';
+import { RandomRecipe } from './RandomRecipe';
+import { PopularSection } from './PopularSection';
 
 export const Home = () => {
   return (
@@ -46,8 +46,8 @@ export const Home = () => {
 
       <div className="flex flex-col gap-6 p-4">
         <RandomRecipe />
-        <Featured />
-        <Recommended />
+        <FeaturedSection />
+        <PopularSection />
       </div>
     </>
   );
