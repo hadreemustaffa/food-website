@@ -12,7 +12,7 @@ export async function getRandomRecipe() {
   }
 }
 
-const getFeaturedRecipesId = async() => {
+export const getFeaturedRecipesId = async() => {
   try {
     const response: AxiosResponse = await axios.get(`${BASE_URL}/recipes/complexSearch?apiKey=${API_KEY}&instructionsRequired=true&fillIngredients=false&addRecipeInformation=false&addRecipeNutrition=false&maxReadyTime=20&ignorePantry=false&sort=meta-score&sortDirection=desc&number=4&limitLicense=true`)
     return response.data.results;
@@ -21,12 +21,9 @@ const getFeaturedRecipesId = async() => {
   }
 }
 
-export const getFeaturedRecipesInformation = async () => {
-  const response = await getFeaturedRecipesId();
-  const recipeId = response.map((data: {id: number}) => data.id)
-
+export const getDetailedRecipeInformation = async ({ recipeId }:  {recipeId: number}) => {
   try {
-    const response: AxiosResponse = await axios.get(`${BASE_URL}/recipes//informationBulk?apiKey=${API_KEY}&ids=${recipeId}&includeNutrition=true`)
+    const response: AxiosResponse = await axios.get(`${BASE_URL}/recipes/informationBulk?apiKey=${API_KEY}&ids=${recipeId}&includeNutrition=true`)
     return response.data;
   } catch (error) {
     console.log(error);
