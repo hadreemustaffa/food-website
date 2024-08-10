@@ -1,124 +1,193 @@
+import { lazy, Suspense, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { getDetailedRecipeInformation } from '../../api/getRecipeData';
 import parse from 'html-react-parser';
 
 import { Button } from '../../components/Button';
-import { RecipeCardMinimal } from '../../components/RecipeCard';
+import { RecipeDetailedProps } from '../../interfaces';
+import { CardListLoader } from '../../components/Skeleton';
+
+type Nutrients = {
+  name: string;
+  amount: number;
+  unit: string;
+};
+
+type Ingredients = {
+  [key: string]: string;
+};
+
+type Step = {
+  step: string;
+  ingredients: Ingredients[];
+};
+
+type Instruction = {
+  step: string;
+  ingredients: [
+    {
+      name: string;
+    }
+  ];
+};
+
+interface RecipeProps extends RecipeDetailedProps {
+  nutrition: {
+    nutrients: Nutrients[];
+  };
+  summary: string;
+  extendedIngredients: Ingredients[];
+  analyzedInstructions: [
+    {
+      steps: Instruction[];
+    }
+  ];
+}
+
+const CardList = lazy(() => import('../../components/CardList'));
 
 export const Recipe = () => {
+  const { recipeId } = useParams() as { recipeId: string };
+  const [loading, setLoading] = useState(true);
+  const [recipe, setRecipe] = useState<RecipeProps>({
+    image: '',
+    id: 0,
+    title: '',
+    spoonacularScore: 0,
+    readyInMinutes: 0,
+    servings: 0,
+    nutrition: {
+      nutrients: [
+        {
+          name: '',
+          amount: 0,
+          unit: '',
+        },
+      ],
+    },
+    summary: '',
+    extendedIngredients: [],
+    analyzedInstructions: [
+      {
+        steps: [],
+      },
+    ],
+  });
+
+  useEffect(() => {
+    // getDetailedRecipeInformation(recipeId).then((data) => {
+    //   setRecipe(data);
+    //   setLoading(false);
+    // });
+    const getData = async () => {
+      const data = await getDetailedRecipeInformation(recipeId);
+      setRecipe(data);
+      setLoading(false);
+      console.log(recipe);
+    };
+
+    getData();
+  }, []);
+
+  const nutrientList = [
+    'Fat',
+    'Carbohydrates',
+    'Protein',
+    'Sugar',
+    'Cholesterol',
+    'Fiber',
+    'Calcium',
+  ];
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <p>Loading...</p>{' '}
+      </div>
+    );
+  }
+
   return (
     <>
-      <div className="flex flex-col gap-4 px-4 pt-6">
-        <img src="/hero-image-mobile.jpg" alt="" />
+      <div className="flex flex-col gap-4">
+        <img src={recipe.image} alt="" />
 
-        <div className="flex flex-col gap-4">
-          <h1 className="font-sans font-bold text-5xl">
-            Whole Wheat Spaghetti with Basil Avocado Pesto
-          </h1>
+        <div className="flex flex-col gap-4 px-4">
+          <h1 className="font-sans font-bold text-5xl">{recipe.title}</h1>
           <div className="flex flex-col flex-wrap gap-4 sm:flex-row sm:justify-between">
             <div className="flex flex-row gap-4 justify-between">
               <div>
                 <p className="text-base text-black-100">Score</p>
-                <p className="text-xl">92</p>
+                <p className="text-xl">{recipe.spoonacularScore.toFixed(0)}</p>
               </div>
               <div className="pl-4 border-l border-tomato-200">
                 <p className="text-base text-black-100">Ready In</p>
-                <p className="text-xl">20m</p>
+                <p className="text-xl">{recipe.readyInMinutes}m</p>
               </div>
               <div className="pl-4 border-l border-tomato-200">
                 <p className="text-base text-black-100">Serves</p>
-                <p className="text-xl">4</p>
+                <p className="text-xl">{recipe.servings}</p>
               </div>
               <div className="pl-4 border-l border-tomato-200">
                 <p className="text-base text-black-100">Calorie</p>
-                <p className="text-xl">200</p>
+                <p className="text-xl">
+                  {recipe.nutrition.nutrients[0].amount.toFixed(0)}
+                </p>
               </div>
             </div>
 
             <Button variant="primary" value="Go to Recipe" />
           </div>
 
-          <p>
-            {parse(
-              'Easy and Delicious Taco Soup is a Mexican recipe that serves 6. One serving contains <b>600 calories</b>, <b>38g of protein</b>, and <b>23g of fat</b>. For <b>$3.02 per serving</b>, this recipe <b>covers 30%</b> of your daily requirements of vitamins and minerals. It is perfect for <b>Autumn</b>. Not a lot of people really liked this main course. 2 people found this recipe to be delicious and satisfying. This recipe from Foodista requires cilantro, tomatoes, cayenne pepper, and olives. From preparation to the plate, this recipe takes around <b>45 minutes</b>. It is a good option if you\'re following a <b>gluten free</b> diet. Overall, this recipe earns a <b>solid spoonacular score of 63%</b>. Users who liked this recipe also liked <a href="https://spoonacular.com/recipes/easy-and-delicious-taco-soup-1367343">Easy and Delicious Taco Soup</a>, <a href="https://spoonacular.com/recipes/taco-tuesday-easy-taco-soup-1360217">Taco Tuesday: Easy Taco Soup</a>, and <a href="https://spoonacular.com/recipes/taco-tuesday-easy-taco-soup-486617">Taco Tuesday: Easy Taco Soup</a>.'
-            )}
-          </p>
+          <p>{parse(`${recipe.summary}`)}</p>
 
           <div className="flex flex-col gap-4">
             <h2 className="font-sans text-2xl">Nutrition</h2>
 
-            <div className="flex flex-row flex-wrap gap-2">
-              <div>
-                <p>
-                  <b>Fat: </b>
-                  <span>50</span>
-                </p>
-                <p></p>
-              </div>
-              <div>
-                <p>
-                  <b>Cholesterol: </b>
-                  <span>50</span>
-                </p>
-                <p></p>
-              </div>
-              <div>
-                <p>
-                  <b>Sodium: </b>
-                  <span>50</span>
-                </p>
-                <p></p>
-              </div>
-              <div>
-                <p>
-                  <b>Carbohydrate: </b>
-                  <span>50</span>
-                </p>
-                <p></p>
-              </div>
-              <div>
-                <p>
-                  <b>Protein: </b>
-                  <span>50</span>
-                </p>
-                <p></p>
-              </div>
-            </div>
+            <ul className="flex flex-row flex-wrap gap-4">
+              {recipe.nutrition.nutrients
+                .filter(({ name }: Nutrients) => nutrientList.includes(name))
+                .map((nutrient: Nutrients, index) => {
+                  return (
+                    <li key={index} className="flex flex-row gap-2">
+                      <p>
+                        <b>{nutrient.name}:</b>
+                      </p>
+                      <p>
+                        {nutrient.amount.toFixed(0)}
+                        {nutrient.unit}
+                      </p>
+                    </li>
+                  );
+                })}
+            </ul>
           </div>
         </div>
       </div>
 
       <div className="flex flex-col gap-4 px-4">
         <h2 className="font-sans font-bold text-3xl">Ingredients</h2>
-        <ul style={{ listStyle: 'inside' }} className="flex flex-col gap-2">
-          <li>1 cup Fresh Basil (packed)</li>
-          <li>1/2 Ripe Avocado</li>
-          <li>2 cloves garlic</li>
-          <li>1/4 cup Cashew Nuts</li>
-          <li>3 tbsp Water</li>
-          <li>1/4 tsp Sea Salt</li>
-          <li>8 oz whole wheat spaghetti</li>
+        <ul className="flex flex-col gap-2 pl-4 list-disc marker:text-tomato-200">
+          {recipe.extendedIngredients.map((ingredient: Ingredients, index) => {
+            return (
+              <li key={index}>
+                <p>{ingredient.original}</p>
+              </li>
+            );
+          })}
         </ul>
       </div>
 
       <div className="flex flex-col gap-4 px-4">
         <h2 className="font-sans font-bold text-3xl">Instructions</h2>
-        <ol
-          style={{ listStyleType: 'decimal', listStylePosition: 'inside' }}
-          className="flex flex-col gap-2"
-        >
-          <li>
-            Place the fresh basil, avocado, garlic, cashews, and sea salt into a
-            food processor and blitz until everything is smooth, scraping down
-            the sides occasionally.
-          </li>
-          <li>
-            While the food processor is running, add in the water 1 tbsp at a
-            time until you have a creamy pesto.
-          </li>
-          <li>Cook whole wheat spaghetti according to package instructions.</li>
-          <li>
-            Drain the pasta, toss with pesto, serve with a little extra fresh
-            basil and Parmesan.
-          </li>
+        <ol className="flex flex-col gap-2 pl-4 list-decimal marker:text-tomato-200">
+          {recipe.analyzedInstructions[0].steps.map((step: Step, index) => {
+            return (
+              <li key={index}>
+                <p>{step.step}</p>
+              </li>
+            );
+          })}
         </ol>
 
         <Button variant="secondary" value="Save This Recipe" />
@@ -128,10 +197,9 @@ export const Recipe = () => {
         <h2 className="font-sans font-bold text-3xl">Similar Recipe</h2>
 
         <div className="grid grid-cols-1 sm:grid grid-flow-row gap-6">
-          <RecipeCardMinimal />
-          <RecipeCardMinimal />
-          <RecipeCardMinimal />
-          <RecipeCardMinimal />
+          <Suspense fallback={<CardListLoader itemCount={4} />}>
+            <CardList recipeId={recipeId} />
+          </Suspense>
         </div>
       </div>
     </>
