@@ -75,10 +75,6 @@ export const Recipe = () => {
   });
 
   useEffect(() => {
-    // getDetailedRecipeInformation(recipeId).then((data) => {
-    //   setRecipe(data);
-    //   setLoading(false);
-    // });
     const getData = async () => {
       const data = await getDetailedRecipeInformation(recipeId);
       setRecipe(data);
