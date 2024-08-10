@@ -3,6 +3,8 @@ import { ButtonIcon } from './Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faSearch } from '@fortawesome/free-solid-svg-icons';
 
+import logo from '/logo.svg';
+
 export const Header = () => {
   const handleSearch = () => {};
   const handleToggle = () => {};
@@ -11,7 +13,7 @@ export const Header = () => {
     <header className="bg-black-950 flex flex-col items-center">
       <div className="w-full flex flex-row items-center justify-between p-4">
         <Link to="/">
-          <img className="h-5" src="./logo.svg" alt="" />
+          <img className="h-5" src={logo} alt="" />
         </Link>
 
         <div className="flex flex-row gap-4">

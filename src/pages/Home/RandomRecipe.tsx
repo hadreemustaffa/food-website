@@ -12,6 +12,7 @@ export const RandomRecipe = () => {
     readyInMinutes: 0,
     servings: 0,
     image: '',
+    id: 0,
   });
 
   const requestRandomRecipe = () => {
@@ -45,6 +46,7 @@ export const RandomRecipe = () => {
           readyTime={recipe.readyInMinutes}
           serveAmount={recipe.servings}
           imagePath={recipe.image}
+          id={recipe.id}
         />
       </div>
     </div>

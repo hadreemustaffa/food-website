@@ -1,6 +1,6 @@
 export interface RecipeDetailedProps {
   image: string;
-  id?: number;
+  id: number;
   title: string;
   spoonacularScore: number;
   readyInMinutes: number;
