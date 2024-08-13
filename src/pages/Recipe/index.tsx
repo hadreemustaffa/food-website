@@ -83,7 +83,13 @@ export const Recipe = () => {
     };
 
     getData();
-  }, []);
+  }, [recipeId]);
+
+  const handleClick = () => {
+    const section = document.querySelector('#recipeSection');
+
+    section?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
 
   const nutrientList = [
     'Fat',
@@ -132,7 +138,11 @@ export const Recipe = () => {
               </div>
             </div>
 
-            <Button variant="primary" value="Go to Recipe" />
+            <Button
+              variant="primary"
+              value="Go to Recipe"
+              onClick={handleClick}
+            />
           </div>
 
           <p>{parse(`${recipe.summary}`)}</p>
@@ -161,7 +171,7 @@ export const Recipe = () => {
         </div>
       </div>
 
-      <div className="flex flex-col gap-4 px-4">
+      <div id="recipeSection" className="flex flex-col gap-4 px-4">
         <h2 className="font-sans font-bold text-3xl">Ingredients</h2>
         <ul className="flex flex-col gap-2 pl-4 list-disc marker:text-tomato-200">
           {recipe.extendedIngredients.map((ingredient: Ingredients, index) => {
