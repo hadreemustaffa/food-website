@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getSimilarRecipesId } from '../api/getRecipeData';
-
-import { RecipeMinimalProps } from '../interfaces';
-import { RecipeCardMinimal } from './RecipeCard';
+import { Link } from 'react-router-dom';
 
 const CardList = ({ recipeId }: { recipeId: string }) => {
   const [recipes, setRecipes] = useState([]);
@@ -14,17 +12,18 @@ const CardList = ({ recipeId }: { recipeId: string }) => {
   }, [recipeId]);
 
   return (
-    <ul className="flex flex-col gap-4">
-      {recipes.map((recipe: RecipeMinimalProps) => (
+    <ol className="flex flex-col gap-4 pl-4 list-decimal">
+      {recipes.map((recipe: { id: number; title: string }) => (
         <li key={recipe.id}>
-          <RecipeCardMinimal
-            id={recipe.id}
-            name={recipe.title}
-            imagePath={recipe.image}
-          />
+          <Link
+            to={`/recipe/${recipe.id}`}
+            className=" hover:text-tomato-100 transition-colors"
+          >
+            {recipe.title}
+          </Link>
         </li>
       ))}
-    </ul>
+    </ol>
   );
 };
 
