@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faSearch } from '@fortawesome/free-solid-svg-icons';
@@ -10,15 +10,31 @@ import logo from '/logo.svg';
 export const Header = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
+  const ref = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (
+        isExpanded &&
+        ref.current &&
+        !ref.current.contains(e.target as Node)
+      ) {
+        setIsExpanded(false);
+      }
+    };
+
+    document.addEventListener('click', handler);
+
+    return () => {
+      document.removeEventListener('click', handler);
+    };
+  }, [isExpanded]);
+
   const handleSearch = () => {};
 
-  const handleClick = () => {
-    setIsExpanded(!isExpanded);
-  };
-
   return (
-    <header className="bg-black-950 flex flex-col items-center sticky top-0 z-50">
-      <div className="w-full flex flex-row items-center justify-between p-4">
+    <>
+      <header className="bg-black-950 flex flex-row items-center p-4 justify-between sticky top-0 z-50">
         <Link to="/">
           <img className="h-5" src={logo} alt="" />
         </Link>
@@ -32,20 +48,36 @@ export const Header = () => {
             />
           </ButtonIcon>
 
-          <ButtonIcon onClick={handleClick}>
-            <FontAwesomeIcon icon={faBars} className="text-tomato-200" />
-          </ButtonIcon>
-        </div>
+          <nav ref={ref}>
+            <ButtonIcon
+              id="navbarToggle"
+              onClick={() => setIsExpanded(!isExpanded)}
+              aria-controls="navMenu"
+              aria-expanded="false"
+            >
+              <FontAwesomeIcon icon={faBars} className="text-tomato-200" />
+            </ButtonIcon>
 
-        {isExpanded && (
-          <div className="flex flex-col items-end gap-4 fixed top-12 left-0 p-4 w-full bg-black-950">
-            <Link to={'/explore'}>Explore</Link>
-            <div className="w-full h-[1px] bg-tomato-200 bg-opacity-25"></div>
-            <Link to={'/login'}>Login</Link>
-            <Link to={'/register'}>Register</Link>
-          </div>
-        )}
-      </div>
-    </header>
+            {isExpanded && (
+              <ul
+                id="navMenu"
+                className="flex flex-col items-end justify-between absolute gap-4 top-12 left-0 p-4 w-full bg-black-950"
+              >
+                <li>
+                  <Link to={'/explore'} onClick={() => setIsExpanded(false)}>
+                    Explore
+                  </Link>
+                </li>
+                <li>
+                  <Link to={'/collection'} onClick={() => setIsExpanded(false)}>
+                    Collection
+                  </Link>
+                </li>
+              </ul>
+            )}
+          </nav>
+        </div>
+      </header>
+    </>
   );
 };
