@@ -1,11 +1,11 @@
-import { lazy, Suspense, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getDetailedRecipeInformation } from '../../api/getRecipeData';
 import parse from 'html-react-parser';
 
 import { Button } from '../../components/Button';
 import { RecipeDetailedProps } from '../../interfaces';
-import { CardListLoader } from '../../components/Skeleton';
+import { SimilarRecipe } from './SimilarRecipe';
 
 type Nutrients = {
   name: string;
@@ -44,11 +44,9 @@ interface RecipeProps extends RecipeDetailedProps {
   ];
 }
 
-const CardList = lazy(() => import('../../components/CardList'));
-
 export const Recipe = () => {
   const { recipeId } = useParams() as { recipeId: string };
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [recipe, setRecipe] = useState<RecipeProps>({
     image: '',
     id: 0,
@@ -78,8 +76,7 @@ export const Recipe = () => {
     const getData = async () => {
       const data = await getDetailedRecipeInformation(recipeId);
       setRecipe(data);
-      setLoading(false);
-      console.log(recipe);
+      setIsLoading(false);
     };
 
     getData();
@@ -101,7 +98,7 @@ export const Recipe = () => {
     'Calcium',
   ];
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="flex justify-center items-center h-screen">
         <p>Loading...</p>{' '}
@@ -203,9 +200,7 @@ export const Recipe = () => {
         <h2 className="font-sans font-bold text-3xl">Similar Recipe</h2>
 
         <div className="grid grid-cols-1 sm:grid grid-flow-row gap-6">
-          <Suspense fallback={<CardListLoader itemCount={4} />}>
-            <CardList recipeId={recipeId} />
-          </Suspense>
+          <SimilarRecipe recipeId={recipeId} />
         </div>
       </div>
     </>

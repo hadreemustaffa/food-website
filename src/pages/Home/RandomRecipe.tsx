@@ -6,19 +6,19 @@ import { RecipeCardDetailed } from '../../components/RecipeCard';
 import { RecipeDetailedProps } from '../../interfaces';
 
 export const RandomRecipe = () => {
-  const [recipe, setRecipe] = useState<RecipeDetailedProps>({
-    title: '',
-    spoonacularScore: 0,
-    readyInMinutes: 0,
-    servings: 0,
-    image: '',
-    id: 0,
-  });
+  const [recipe, setRecipe] = useState<RecipeDetailedProps | null>(null);
 
   const requestRandomRecipe = () => {
     getRandomRecipe()
       .then((data) => {
-        setRecipe(data);
+        setRecipe({
+          title: data.title,
+          spoonacularScore: Math.floor(data.spoonacularScore),
+          readyInMinutes: data.readyInMinutes,
+          servings: data.servings,
+          image: data.image,
+          id: data.id,
+        });
       })
       .catch((error) => {
         console.log(error);
@@ -40,14 +40,16 @@ export const RandomRecipe = () => {
         />
       </div>
       <div className="flex flex-col gap-4">
-        <RecipeCardDetailed
-          name={recipe.title}
-          score={Math.floor(recipe.spoonacularScore)}
-          readyTime={recipe.readyInMinutes}
-          serveAmount={recipe.servings}
-          imagePath={recipe.image}
-          id={recipe.id}
-        />
+        {recipe ? (
+          <RecipeCardDetailed
+            name={recipe.title}
+            score={Math.floor(recipe.spoonacularScore)}
+            readyTime={recipe.readyInMinutes}
+            serveAmount={recipe.servings}
+            imagePath={recipe.image}
+            id={recipe.id}
+          />
+        ) : null}
       </div>
     </div>
   );

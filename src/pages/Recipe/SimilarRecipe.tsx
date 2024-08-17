@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { getSimilarRecipesId } from '../api/getRecipeData';
 import { Link } from 'react-router-dom';
+import { getSimilarRecipesId } from '../../api/getRecipeData';
 
-const CardList = ({ recipeId }: { recipeId: string }) => {
+export const SimilarRecipe = ({ recipeId }: { recipeId: string }) => {
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
@@ -26,5 +26,3 @@ const CardList = ({ recipeId }: { recipeId: string }) => {
     </ol>
   );
 };
-
-export default CardList;
