@@ -6,6 +6,7 @@ import parse from 'html-react-parser';
 import { Button } from '../../components/Button';
 import { RecipeDetailedProps } from '../../interfaces';
 import { SimilarRecipe } from './SimilarRecipe';
+import { Loader } from '../../components/Loader';
 
 type Nutrients = {
   name: string;
@@ -27,7 +28,7 @@ type Instruction = {
   ingredients: [
     {
       name: string;
-    }
+    },
   ];
 };
 
@@ -40,7 +41,7 @@ interface RecipeProps extends RecipeDetailedProps {
   analyzedInstructions: [
     {
       steps: Instruction[];
-    }
+    },
   ];
 }
 
@@ -99,60 +100,56 @@ export const Recipe = () => {
   ];
 
   if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <p>Loading...</p>{' '}
-      </div>
-    );
+    return <Loader />;
   }
 
   return (
     <>
-      <div className="flex flex-col gap-4">
-        <img src={recipe.image} alt="" />
+      <div className='flex flex-col gap-4'>
+        <img src={recipe.image} alt='' />
 
-        <div className="flex flex-col gap-4 px-4">
-          <h1 className="font-sans font-bold text-5xl">{recipe.title}</h1>
-          <div className="flex flex-col flex-wrap gap-4 sm:flex-row sm:justify-between">
-            <div className="flex flex-row gap-4 justify-between">
+        <div className='flex flex-col gap-4 px-4'>
+          <h1 className='font-sans text-5xl font-bold'>{recipe.title}</h1>
+          <div className='flex flex-col flex-wrap gap-4 sm:flex-row sm:justify-between'>
+            <div className='flex flex-row justify-between gap-4'>
               <div>
-                <p className="text-base text-black-100">Score</p>
-                <p className="text-xl">{recipe.spoonacularScore.toFixed(0)}</p>
+                <p className='text-base text-black-100'>Score</p>
+                <p className='text-xl'>{recipe.spoonacularScore.toFixed(0)}</p>
               </div>
-              <div className="pl-4 border-l border-tomato-200">
-                <p className="text-base text-black-100">Ready In</p>
-                <p className="text-xl">{recipe.readyInMinutes}m</p>
+              <div className='border-l border-tomato-200 pl-4'>
+                <p className='text-base text-black-100'>Ready In</p>
+                <p className='text-xl'>{recipe.readyInMinutes}m</p>
               </div>
-              <div className="pl-4 border-l border-tomato-200">
-                <p className="text-base text-black-100">Serves</p>
-                <p className="text-xl">{recipe.servings}</p>
+              <div className='border-l border-tomato-200 pl-4'>
+                <p className='text-base text-black-100'>Serves</p>
+                <p className='text-xl'>{recipe.servings}</p>
               </div>
-              <div className="pl-4 border-l border-tomato-200">
-                <p className="text-base text-black-100">Calorie</p>
-                <p className="text-xl">
+              <div className='border-l border-tomato-200 pl-4'>
+                <p className='text-base text-black-100'>Calorie</p>
+                <p className='text-xl'>
                   {recipe.nutrition.nutrients[0].amount.toFixed(0)}
                 </p>
               </div>
             </div>
 
             <Button
-              variant="primary"
-              value="Go to Recipe"
+              variant='primary'
+              value='Go to Recipe'
               onClick={handleClick}
             />
           </div>
 
           <p>{parse(`${recipe.summary}`)}</p>
 
-          <div className="flex flex-col gap-4">
-            <h2 className="font-sans text-2xl">Nutrition</h2>
+          <div className='flex flex-col gap-4'>
+            <h2 className='font-sans text-2xl'>Nutrition</h2>
 
-            <ul className="flex flex-row flex-wrap gap-4">
+            <ul className='flex flex-row flex-wrap gap-4'>
               {recipe.nutrition.nutrients
                 .filter(({ name }: Nutrients) => nutrientList.includes(name))
                 .map((nutrient: Nutrients, index) => {
                   return (
-                    <li key={index} className="flex flex-row gap-2">
+                    <li key={index} className='flex flex-row gap-2'>
                       <p>
                         <b>{nutrient.name}:</b>
                       </p>
@@ -168,9 +165,9 @@ export const Recipe = () => {
         </div>
       </div>
 
-      <div id="recipeSection" className="flex flex-col gap-4 px-4">
-        <h2 className="font-sans font-bold text-3xl">Ingredients</h2>
-        <ul className="flex flex-col gap-2 pl-4 list-disc marker:text-tomato-200">
+      <div id='recipeSection' className='flex flex-col gap-4 px-4'>
+        <h2 className='font-sans text-3xl font-bold'>Ingredients</h2>
+        <ul className='flex list-disc flex-col gap-2 pl-4 marker:text-tomato-200'>
           {recipe.extendedIngredients.map((ingredient: Ingredients, index) => {
             return (
               <li key={index}>
@@ -181,9 +178,9 @@ export const Recipe = () => {
         </ul>
       </div>
 
-      <div className="flex flex-col gap-4 px-4">
-        <h2 className="font-sans font-bold text-3xl">Instructions</h2>
-        <ol className="flex flex-col gap-2 pl-4 list-decimal marker:text-tomato-200">
+      <div className='flex flex-col gap-4 px-4'>
+        <h2 className='font-sans text-3xl font-bold'>Instructions</h2>
+        <ol className='flex list-decimal flex-col gap-2 pl-4 marker:text-tomato-200'>
           {recipe.analyzedInstructions[0].steps.map((step: Step, index) => {
             return (
               <li key={index}>
@@ -193,13 +190,13 @@ export const Recipe = () => {
           })}
         </ol>
 
-        <Button variant="secondary" value="Save This Recipe" />
+        <Button variant='secondary' value='Save This Recipe' />
       </div>
 
-      <div className="flex flex-col gap-4 px-4">
-        <h2 className="font-sans font-bold text-3xl">Similar Recipe</h2>
+      <div className='flex flex-col gap-4 px-4'>
+        <h2 className='font-sans text-3xl font-bold'>Similar Recipe</h2>
 
-        <div className="grid grid-cols-1 sm:grid grid-flow-row gap-6">
+        <div className='grid grid-flow-row grid-cols-1 gap-6 sm:grid'>
           <SimilarRecipe recipeId={recipeId} />
         </div>
       </div>
