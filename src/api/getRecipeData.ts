@@ -68,3 +68,14 @@ export const getSimilarRecipesId = async (recipeId: string) => {
     console.log(error);
   }
 };
+
+export const getSearchRecipes = async (query: string) => {
+  try {
+    const response: AxiosResponse = await axios.get(
+      `${BASE_URL}/recipes/complexSearch?apiKey=${API_KEY}&query=${query}&type=main course&instructionsRequired=true&fillIngredients=false&addRecipeInformation=false&addRecipeNutrition=false&maxReadyTime=60&ignorePantry=false&sort=popularity&sortDirection=desc&number=4&limitLicense=true`
+    );
+    return response.data.results;
+  } catch (error) {
+    console.log(error);
+  }
+};
