@@ -3,10 +3,21 @@ import { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ButtonIcon } from "./Button";
 import { faArrowRight, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
+import slugify from "slugify";
 
-export const Search = () => {
+interface FormElements extends HTMLFormControlsCollection {
+  queryInput: HTMLInputElement;
+}
+interface QueryFormElement extends HTMLFormElement {
+  readonly elements: FormElements;
+}
+
+export const SearchInput = () => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [query, setQuery] = useState("");
 
+  const navigate = useNavigate();
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -27,36 +38,45 @@ export const Search = () => {
     };
   }, [isExpanded]);
 
-  const handleSearch = () => {
+  const handleToggle = () => {
     setIsExpanded(!isExpanded);
   };
 
+  function handleSubmit(event: React.FormEvent<QueryFormElement>) {
+    event.preventDefault();
+    navigate(`/search/${slugify(query)}`);
+    setIsExpanded(false);
+  }
+
   return (
     <div ref={ref}>
-      <ButtonIcon onClick={handleSearch}>
-        <FontAwesomeIcon
-          icon={faSearch}
-          className="text-tomato-200"
-          onClick={handleSearch}
-        />
+      <ButtonIcon onClick={handleToggle}>
+        <FontAwesomeIcon icon={faSearch} className="text-tomato-200" />
       </ButtonIcon>
 
       {isExpanded && (
         <div className="absolute left-0 top-14 z-50 w-full">
-          <div className="mx-4 flex flex-row justify-between overflow-hidden rounded-sm bg-black-950">
+          <form
+            onSubmit={handleSubmit}
+            className="mx-4 flex flex-row justify-between overflow-hidden rounded-sm bg-black-950"
+          >
             <input
-              type="text"
-              name="search"
+              type="search"
+              name="query"
               id="searchInput"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setQuery(e.target.value);
+              }}
               className="w-full border-2 border-tomato-200 bg-black-950 px-2"
+              autoFocus
             />
-            <ButtonIcon className="bg-tomato-200">
+            <button type="submit" className="bg-tomato-200">
               <FontAwesomeIcon
                 icon={faArrowRight}
                 className="px-4 text-black-950"
               />
-            </ButtonIcon>
-          </div>
+            </button>
+          </form>
         </div>
       )}
     </div>

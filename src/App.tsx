@@ -6,6 +6,7 @@ import { Recipe } from './pages/Recipe';
 import { NotFound } from './pages/NotFound';
 import { Layout } from './components/Layout';
 import { Collection } from './pages/Collection';
+import { Search } from './pages/Search';
 
 function App() {
   return (
@@ -13,12 +14,13 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<Layout />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/explore" element={<Explore />} />
-            <Route path="/recipe/:recipeId" element={<Recipe />} />
-            <Route path="/collection" element={<Collection />} />
-            <Route path="/404" element={<NotFound />} />
-            <Route path="*" element={<Navigate to="/404" replace />} />
+            <Route path='/' element={<Home />} />
+            <Route path='/explore' element={<Explore />} />
+            <Route path='/recipe/:recipeId' element={<Recipe />} />
+            <Route path='/collection' element={<Collection />} />
+            <Route path='/search/:query' element={<Search />} />
+            <Route path='/404' element={<NotFound />} />
+            <Route path='*' element={<Navigate to='/404' replace />} />
           </Route>
         </Routes>
       </BrowserRouter>
