@@ -12,12 +12,12 @@ export const SimilarRecipe = ({ recipeId }: { recipeId: string }) => {
   }, [recipeId]);
 
   return (
-    <ol className="flex flex-col gap-4 pl-4 list-decimal">
+    <ol className='flex list-decimal flex-col gap-4 pl-4'>
       {recipes.map((recipe: { id: number; title: string }) => (
         <li key={recipe.id}>
           <Link
             to={`/recipe/${recipe.id}`}
-            className=" hover:text-tomato-100 transition-colors"
+            className='transition-colors hover:text-tomato-200'
           >
             {recipe.title}
           </Link>

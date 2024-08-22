@@ -55,7 +55,7 @@ export const Search = () => {
         </ul>
       ) : (
         <div className='h-screen'>
-          <p>No results for {query}</p>
+          <p>No results for {formatQuery}</p>
         </div>
       )}
     </div>

@@ -108,25 +108,27 @@ export const Recipe = () => {
       <div className='flex flex-col gap-4'>
         <img src={recipe.image} alt='' />
 
-        <div className='flex flex-col gap-4 px-4'>
+        <div className='flex flex-col gap-4'>
           <h1 className='font-sans text-5xl font-bold'>{recipe.title}</h1>
           <div className='flex flex-col flex-wrap gap-4 sm:flex-row sm:justify-between'>
-            <div className='flex flex-row justify-between gap-4'>
+            <div className='grid grid-cols-4 justify-between'>
               <div>
-                <p className='text-base text-black-100'>Score</p>
-                <p className='text-xl'>{recipe.spoonacularScore.toFixed(0)}</p>
+                <p>Score</p>
+                <p className='text-xl font-bold'>
+                  {recipe.spoonacularScore.toFixed(0)}
+                </p>
               </div>
               <div className='border-l border-tomato-200 pl-4'>
-                <p className='text-base text-black-100'>Ready In</p>
-                <p className='text-xl'>{recipe.readyInMinutes}m</p>
+                <p>Ready In</p>
+                <p className='text-xl font-bold'>{recipe.readyInMinutes}m</p>
               </div>
               <div className='border-l border-tomato-200 pl-4'>
-                <p className='text-base text-black-100'>Serves</p>
-                <p className='text-xl'>{recipe.servings}</p>
+                <p>Serves</p>
+                <p className='text-xl font-bold'>{recipe.servings}</p>
               </div>
               <div className='border-l border-tomato-200 pl-4'>
-                <p className='text-base text-black-100'>Calorie</p>
-                <p className='text-xl'>
+                <p>Calorie</p>
+                <p className='text-xl font-bold'>
                   {recipe.nutrition.nutrients[0].amount.toFixed(0)}
                 </p>
               </div>
@@ -165,9 +167,9 @@ export const Recipe = () => {
         </div>
       </div>
 
-      <div id='recipeSection' className='flex flex-col gap-4 px-4'>
+      <div id='recipeSection' className='flex flex-col gap-4'>
         <h2 className='font-sans text-3xl font-bold'>Ingredients</h2>
-        <ul className='flex list-disc flex-col gap-2 pl-4 marker:text-tomato-200'>
+        <ul className='flex list-disc flex-col gap-2 pl-4 marker:text-tomato-300'>
           {recipe.extendedIngredients.map((ingredient: Ingredients, index) => {
             return (
               <li key={index}>
@@ -178,9 +180,9 @@ export const Recipe = () => {
         </ul>
       </div>
 
-      <div className='flex flex-col gap-4 px-4'>
+      <div className='flex flex-col gap-4'>
         <h2 className='font-sans text-3xl font-bold'>Instructions</h2>
-        <ol className='flex list-decimal flex-col gap-2 pl-4 marker:text-tomato-200'>
+        <ol className='flex list-decimal flex-col gap-2 pl-4 marker:font-bold marker:text-tomato-300'>
           {recipe.analyzedInstructions[0].steps.map((step: Step, index) => {
             return (
               <li key={index}>
@@ -193,7 +195,7 @@ export const Recipe = () => {
         <Button variant='secondary' value='Save This Recipe' />
       </div>
 
-      <div className='flex flex-col gap-4 px-4'>
+      <div className='flex flex-col gap-4'>
         <h2 className='font-sans text-3xl font-bold'>Similar Recipe</h2>
 
         <div className='grid grid-flow-row grid-cols-1 gap-6 sm:grid'>

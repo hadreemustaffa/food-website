@@ -4,12 +4,14 @@ import { getPopularSectionRecipesId } from '../../api/getRecipeData';
 import { RecipeCardMinimal } from '../../components/RecipeCard';
 import { RecipeMinimalProps } from '../../interfaces';
 import { CardListLoader } from '../../components/Skeleton';
+import { getLocalData } from '../../api/getLocalRecipeData';
 
 const CardList = lazy(() =>
-  getPopularSectionRecipesId().then((data) => {
+  // getPopularSectionRecipesId().then((data) => {
+  getLocalData().then((data) => {
     return {
       default: () => {
-        const listItems = data.map((recipe: RecipeMinimalProps) => (
+        const listItems = data.recommended.map((recipe: RecipeMinimalProps) => (
           <li key={recipe.id}>
             <RecipeCardMinimal
               id={recipe.id}
@@ -19,7 +21,9 @@ const CardList = lazy(() =>
           </li>
         ));
 
-        return <ul className="flex flex-col gap-4">{listItems}</ul>;
+        return (
+          <ul className='grid grid-cols-auto-fill-225 gap-4'>{listItems}</ul>
+        );
       },
     };
   })
@@ -27,15 +31,11 @@ const CardList = lazy(() =>
 
 export const PopularSection = () => {
   return (
-    <div className="flex flex-col gap-4">
-      <h2 className="text-4xl font-sans font-bold">Popular</h2>
-      <div className="flex flex-col gap-4">
-        <div className="flex flex-col gap-4">
-          <Suspense fallback={<CardListLoader itemCount={4} />}>
-            <CardList />
-          </Suspense>
-        </div>
-      </div>
+    <div className='col-span-1 row-start-4 flex flex-col gap-4 sm:col-span-2 md:col-span-3 lg:col-span-4'>
+      <h2 className='font-sans text-4xl font-bold'>Popular</h2>
+      <Suspense fallback={<CardListLoader itemCount={4} />}>
+        <CardList />
+      </Suspense>
     </div>
   );
 };

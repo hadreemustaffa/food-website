@@ -2,12 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-b {
-  color: #ff9170;
-}
-
 a:not([class]) {
-  color: #ffd1c3;
+  color: #ba3f1c;
+  font-weight: bold;
 }
 a:not([class]):hover {
   text-decoration: underline;
