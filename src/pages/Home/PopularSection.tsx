@@ -4,14 +4,12 @@ import { getPopularSectionRecipesId } from '../../api/getRecipeData';
 import { RecipeCardMinimal } from '../../components/RecipeCard';
 import { RecipeMinimalProps } from '../../interfaces';
 import { CardListLoader } from '../../components/Skeleton';
-import { getLocalData } from '../../api/getLocalRecipeData';
 
 const CardList = lazy(() =>
-  // getPopularSectionRecipesId().then((data) => {
-  getLocalData().then((data) => {
+  getPopularSectionRecipesId().then((data) => {
     return {
       default: () => {
-        const listItems = data.recommended.map((recipe: RecipeMinimalProps) => (
+        const listItems = data.map((recipe: RecipeMinimalProps) => (
           <li key={recipe.id}>
             <RecipeCardMinimal
               id={recipe.id}

@@ -31,7 +31,7 @@ export const RecipeCardDetailed = ({
       <div className='h-48 w-full lg:w-1/3'>
         <img className='h-full w-full object-cover' src={imagePath} alt='' />
       </div>
-      <div className='flex w-full flex-col justify-center gap-4 bg-black-950 p-4'>
+      <div className='flex w-full flex-col justify-center gap-4 bg-black-950 p-4 md:p-8'>
         <p className='text-xl font-bold hover:text-tomato-300 lg:text-2xl'>
           {name}
         </p>

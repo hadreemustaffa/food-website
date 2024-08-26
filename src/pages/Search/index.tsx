@@ -35,14 +35,14 @@ export const Search = () => {
   }
 
   return (
-    <div className='flex flex-col gap-6 p-4'>
+    <div className='col-span-full flex flex-col gap-6 p-4'>
       <h1 className='font-sans text-4xl font-bold'>
         Search results for{' '}
         <span className='text-tomato-100'>{formatQuery}</span>
       </h1>
 
       {recipes.length > 0 ? (
-        <ul className='grid grid-cols-1 gap-6 sm:grid'>
+        <ul className='grid grid-cols-auto-fill-225 gap-4'>
           {recipes.map((recipe) => (
             <li key={recipe.id}>
               <RecipeCardMinimal

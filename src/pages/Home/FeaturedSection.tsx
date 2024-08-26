@@ -4,14 +4,12 @@ import { getFeaturedSectionRecipesId } from '../../api/getRecipeData';
 import { RecipeCardMinimal } from '../../components/RecipeCard';
 import { RecipeMinimalProps } from '../../interfaces';
 import { CardListLoader } from '../../components/Skeleton';
-import { getLocalData } from '../../api/getLocalRecipeData';
 
 const CardList = lazy(() =>
-  // getFeaturedSectionRecipesId().then((data) => {
-  getLocalData().then((data) => {
+  getFeaturedSectionRecipesId().then((data) => {
     return {
       default: () => {
-        const listItems = data.featured.map((recipe: RecipeMinimalProps) => (
+        const listItems = data.map((recipe: RecipeMinimalProps) => (
           <li key={recipe.id}>
             <RecipeCardMinimal
               id={recipe.id}

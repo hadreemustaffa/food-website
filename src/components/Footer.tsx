@@ -7,7 +7,7 @@ import {
   faTwitter,
 } from '@fortawesome/free-brands-svg-icons';
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
-import { Button } from './Button';
+import { ButtonIcon } from './Button';
 
 const handleClick = () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -16,13 +16,20 @@ const handleClick = () => {
 export const Footer = () => {
   return (
     <footer className='bg-black-950 text-white'>
-      <div className='m-auto flex w-full max-w-7xl flex-row items-start justify-between gap-4 p-4 sm:p-8'>
-        <div className='flex flex-col items-start gap-4'>
+      <div className='m-auto flex w-full max-w-7xl flex-col items-center justify-between gap-4 p-4 text-center sm:flex-row sm:items-start sm:p-8 sm:text-left'>
+        <div className='flex flex-col items-center gap-4 sm:items-start'>
           <img className='h-8' src={logo} alt='' />
 
-          <Button variant='secondary' value='Back to Top' onClick={handleClick}>
-            <FontAwesomeIcon icon={faArrowUp} />
-          </Button>
+          <ButtonIcon
+            onClick={handleClick}
+            className='border-2 border-tomato-200 px-4 py-2'
+            title='Back to Top'
+          >
+            <FontAwesomeIcon
+              icon={faArrowUp}
+              className='text-white hover:text-tomato-300'
+            />
+          </ButtonIcon>
         </div>
 
         <div className='flex flex-col gap-4'>
@@ -67,19 +74,19 @@ export const Footer = () => {
               to={'https://www.facebook.com/'}
               className='text-white hover:text-tomato-300'
             >
-              <FontAwesomeIcon icon={faFacebook} />
+              <FontAwesomeIcon icon={faFacebook} className='h-4 w-4' />
             </Link>
             <Link
               to={'https://www.x.com/'}
               className='text-white hover:text-tomato-300'
             >
-              <FontAwesomeIcon icon={faTwitter} />
+              <FontAwesomeIcon icon={faTwitter} className='h-4 w-4' />
             </Link>
             <Link
               to={'https://www.instagram.com/'}
               className='text-white hover:text-tomato-300'
             >
-              <FontAwesomeIcon icon={faInstagram} />
+              <FontAwesomeIcon icon={faInstagram} className='h-4 w-4' />
             </Link>
           </div>
         </div>
