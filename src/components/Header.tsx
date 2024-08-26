@@ -2,21 +2,17 @@ import { Link } from 'react-router-dom';
 
 import logo from '/logo.svg';
 import { NavigationMenu } from './NavigationMenu';
-import { SearchInput } from './SearchInput';
 
 export const Header = () => {
   return (
     <>
       <header className='sticky top-0 z-50 bg-black-950'>
-        <div className='m-auto flex max-w-7xl flex-row items-center justify-between p-4 sm:px-8'>
+        <div className='relative m-auto flex max-w-7xl flex-row flex-wrap items-center justify-between gap-4 p-4 sm:px-8'>
           <Link to='/'>
-            <img className='h-8' src={logo} alt='' />
+            <img className='h-8 w-24' src={logo} alt='' />
           </Link>
 
-          <div className='flex flex-row gap-4'>
-            <SearchInput />
-            <NavigationMenu />
-          </div>
+          <NavigationMenu />
         </div>
       </header>
     </>

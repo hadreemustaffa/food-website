@@ -5,6 +5,7 @@ import { RecipeMinimalProps } from '../../interfaces';
 import { RecipeCardMinimal } from '../../components/RecipeCard';
 import { CardListLoader } from '../../components/Skeleton';
 import { Button } from '../../components/Button';
+import { SearchInput } from '../../components/SearchInput';
 
 const CardList = lazy(() =>
   getExploreRecipesId().then((data) => {
@@ -20,7 +21,9 @@ const CardList = lazy(() =>
           </li>
         ));
 
-        return <ul className="flex flex-col gap-4">{listItems}</ul>;
+        return (
+          <ul className='grid grid-cols-auto-fill-225 gap-4'>{listItems}</ul>
+        );
       },
     };
   })
@@ -28,16 +31,16 @@ const CardList = lazy(() =>
 
 export const Explore = () => {
   return (
-    <div className="flex flex-col gap-6 p-4">
-      <h1 className="text-4xl font-sans font-bold">Explore</h1>
+    <div className='col-span-full flex flex-col gap-6'>
+      <h1 className='sr-only'>Explore</h1>
 
-      <div className="grid grid-cols-1 sm:grid grid-flow-row gap-6">
-        <Suspense fallback={<CardListLoader itemCount={8} />}>
-          <CardList />
-        </Suspense>
+      <SearchInput />
 
-        <Button variant="secondary" value="More" className=" border-white" />
-      </div>
+      <Suspense fallback={<CardListLoader itemCount={8} />}>
+        <CardList />
+      </Suspense>
+
+      <Button variant='secondary' value='More' className='border-white' />
     </div>
   );
 };
