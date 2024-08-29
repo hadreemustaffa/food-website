@@ -57,7 +57,7 @@ export default {
     },
     extend: {
       gridTemplateColumns: {
-        'auto-fill-225': 'repeat(auto-fit, minmax(225px, 1fr))',
+        'auto-fill-225': 'repeat(auto-fill, minmax(225px, 1fr))',
       },
       aspectRatio: {
         '4/3': '4 / 3',
