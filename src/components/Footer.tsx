@@ -16,7 +16,7 @@ const handleClick = () => {
 export const Footer = () => {
   return (
     <footer className='bg-black-950 text-white'>
-      <div className='m-auto flex w-full max-w-7xl flex-col items-center justify-between gap-4 p-4 text-center sm:flex-row sm:items-start sm:p-8 sm:text-left'>
+      <div className='mx-auto flex w-full max-w-7xl flex-col items-center justify-between gap-4 p-4 text-center sm:flex-row sm:items-start sm:p-8 sm:text-left'>
         <div className='flex flex-col items-center gap-4 sm:items-start'>
           <img className='h-8' src={logo} alt='' />
 
