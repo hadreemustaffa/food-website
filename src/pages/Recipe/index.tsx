@@ -48,17 +48,27 @@ export const Recipe = () => {
   const { recipeId } = useParams() as { recipeId: string };
   const [isLoading, setIsLoading] = useState(true);
   const [recipe, setRecipe] = useState<RecipeProps | null>(null);
+  const [isSaved, setIsSaved] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
-      const storedRecipe = localStorage.getItem(`recipe-${recipeId}`);
-      if (storedRecipe) {
-        setRecipe(JSON.parse(storedRecipe));
+      const savedRecipesList = JSON.parse(
+        localStorage.getItem('saved-recipes') || '[]'
+      );
+
+      const savedRecipe = savedRecipesList.find(
+        (recipe: RecipeProps) => `${recipe.id}` === recipeId
+      );
+
+      if (savedRecipe) {
+        setRecipe(savedRecipe);
         setIsLoading(false);
+        setIsSaved(true);
       } else {
         const data = await getDetailedRecipeInformation(recipeId);
         setRecipe(data);
         setIsLoading(false);
+        setIsSaved(false);
       }
     };
 
@@ -72,20 +82,36 @@ export const Recipe = () => {
   };
 
   const handleSaveRecipe = () => {
-    const savedRecipes = JSON.parse(
+    const savedRecipesList = JSON.parse(
       localStorage.getItem('saved-recipes') || '[]'
     );
 
-    const isRecipeSaved = savedRecipes.some(
+    const isRecipeSaved = savedRecipesList.some(
       (savedRecipe: RecipeProps) => savedRecipe.id === recipe?.id
     );
 
     if (!isRecipeSaved) {
-      const updatedRecipes = [recipe, ...savedRecipes];
+      const updatedRecipes = [recipe, ...savedRecipesList];
       localStorage.setItem('saved-recipes', JSON.stringify(updatedRecipes));
+      setIsSaved(true);
     } else {
       alert('Recipe is already saved.');
+      setIsSaved(true);
     }
+  };
+
+  const handleDeleteRecipe = () => {
+    const savedRecipesList = JSON.parse(
+      localStorage.getItem('saved-recipes') || '[]'
+    );
+
+    const updatedRecipes = savedRecipesList.filter(
+      (recipe: RecipeProps) => `${recipe.id}` !== recipeId
+    );
+
+    localStorage.setItem('saved-recipes', JSON.stringify(updatedRecipes));
+
+    setIsSaved(false);
   };
 
   const nutrientList = [
@@ -198,11 +224,19 @@ export const Recipe = () => {
               );
             })}
           </ol>
-          <Button
-            variant='secondary'
-            value='Save This Recipe'
-            onClick={handleSaveRecipe}
-          />
+          {isSaved ? (
+            <Button
+              variant='secondary'
+              value='Recipe Saved'
+              onClick={handleDeleteRecipe}
+            />
+          ) : (
+            <Button
+              variant='secondary'
+              value='Save This Recipe'
+              onClick={handleSaveRecipe}
+            />
+          )}
         </div>
       </div>
     </>
