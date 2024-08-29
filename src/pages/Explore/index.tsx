@@ -4,7 +4,6 @@ import { getExploreRecipesId } from '../../api/getRecipeData';
 import { RecipeMinimalProps } from '../../interfaces';
 import { RecipeCardMinimal } from '../../components/RecipeCard';
 import { CardListLoader } from '../../components/Skeleton';
-import { Button } from '../../components/Button';
 import { SearchInput } from '../../components/SearchInput';
 
 const CardList = lazy(() =>
@@ -39,8 +38,6 @@ export const Explore = () => {
       <Suspense fallback={<CardListLoader itemCount={8} />}>
         <CardList />
       </Suspense>
-
-      <Button variant='secondary' value='More' className='border-white' />
     </div>
   );
 };

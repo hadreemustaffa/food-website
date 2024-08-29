@@ -37,7 +37,7 @@ export const SearchInput = () => {
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           setQuery(e.target.value);
         }}
-        className='search-cancel:appearance-none search-cancel:w-4 search-cancel:h-4 search-cancel:bg-[url(./xmark-solid.svg)] search-cancel:bg-no-repeat search-cancel:cursor-pointer search-cancel:bg-center w-full border-none bg-black-transparent outline-none'
+        className='w-full border-none bg-black-transparent outline-none search-cancel:h-4 search-cancel:w-4 search-cancel:cursor-pointer search-cancel:appearance-none search-cancel:bg-[url(./xmark-solid.svg)] search-cancel:bg-center search-cancel:bg-no-repeat'
         placeholder='Search'
       />
 
