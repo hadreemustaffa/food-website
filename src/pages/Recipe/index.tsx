@@ -5,7 +5,6 @@ import parse from 'html-react-parser';
 
 import { Button } from '../../components/Button';
 import { RecipeDetailedProps } from '../../interfaces';
-import { SimilarRecipe } from './SimilarRecipe';
 import { Loader } from '../../components/Loader';
 
 type Nutrients = {
@@ -205,11 +204,6 @@ export const Recipe = () => {
             onClick={handleSaveRecipe}
           />
         </div>
-      </div>
-
-      <div className='flex flex-col gap-4 sm:col-span-full'>
-        <h2 className='font-sans text-3xl font-bold'>Similar Recipe</h2>
-        <SimilarRecipe recipeId={recipeId} />
       </div>
     </>
   );

@@ -58,17 +58,6 @@ export const getDetailedRecipeInformation = async (recipeId: string) => {
   }
 };
 
-export const getSimilarRecipesId = async (recipeId: string) => {
-  try {
-    const response: AxiosResponse = await axios.get(
-      `${BASE_URL}/recipes/${recipeId}/similar?apiKey=${API_KEY}&number=4`
-    );
-    return response.data;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 export const getSearchRecipes = async (query: string) => {
   try {
     const response: AxiosResponse = await axios.get(
