@@ -4,6 +4,7 @@ import { getRandomRecipe } from '../../api/getRecipeData';
 import { Button } from '../../components/Button';
 import { RecipeCardDetailed } from '../../components/RecipeCard';
 import { RecipeDetailedProps } from '../../interfaces';
+import { CardLoader } from '../../components/Skeleton';
 
 export const RandomRecipe = () => {
   const [recipe, setRecipe] = useState<RecipeDetailedProps | null>(null);
@@ -49,7 +50,9 @@ export const RandomRecipe = () => {
           imagePath={recipe.image}
           id={recipe.id}
         />
-      ) : null}
+      ) : (
+        <CardLoader />
+      )}
     </div>
   );
 };
