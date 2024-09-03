@@ -22,7 +22,7 @@ export const SearchInput = () => {
     if (query === '') {
       return null;
     }
-    navigate(`/search/${slugify(query)}`);
+    navigate(`/search?q=${slugify(query)}`);
   }
 
   return (
