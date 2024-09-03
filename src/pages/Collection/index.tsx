@@ -34,8 +34,8 @@ export const Collection = () => {
   };
 
   return (
-    <div className='col-span-full flex flex-col gap-4'>
-      <div className='flex flex-row justify-between'>
+    <div className='col-span-full flex h-[50vh] flex-col gap-4'>
+      <div className='flex flex-row flex-wrap justify-between'>
         <h1 className='font-sans text-4xl font-bold'>Collection</h1>
         <Button
           variant='primary'

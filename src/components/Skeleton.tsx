@@ -38,7 +38,7 @@ const DetailedCardSkeleton = () => {
 const MinimalCardSkeleton = () => {
   return (
     <>
-      <div className='flex h-fit w-full max-w-56 animate-pulse flex-col rounded-sm bg-black-100 sm:h-56'>
+      <div className='flex h-fit w-full animate-pulse flex-col rounded-sm bg-black-100 sm:h-56'>
         <div className='flex h-48 w-full animate-pulse flex-col bg-black-150'>
           <svg
             className='m-auto h-10 w-10 text-black-100'
