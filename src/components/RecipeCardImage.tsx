@@ -3,9 +3,14 @@ import { useEffect, useState } from 'react';
 interface RecipeCardImageProps {
   src: string;
   fallbackSrc: string;
+  alt: string;
 }
 
-export const RecipeCardImage = ({ src, fallbackSrc }: RecipeCardImageProps) => {
+export const RecipeCardImage = ({
+  src,
+  fallbackSrc,
+  alt,
+}: RecipeCardImageProps) => {
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -14,16 +19,12 @@ export const RecipeCardImage = ({ src, fallbackSrc }: RecipeCardImageProps) => {
 
   return (
     <>
-      {error ? (
-        <img src={fallbackSrc} alt='' />
-      ) : (
-        <img
-          className='h-full w-full object-cover'
-          src={src}
-          onError={() => setError(true)}
-          alt=''
-        />
-      )}
+      <img
+        className='w-full object-cover'
+        src={error ? fallbackSrc : src}
+        onError={() => setError(true)}
+        alt={alt}
+      />
     </>
   );
 };
