@@ -43,7 +43,7 @@ export const RandomRecipe = () => {
 
       {recipe ? (
         <RecipeCardDetailed
-          name={recipe.title}
+          title={recipe.title}
           score={Math.floor(recipe.spoonacularScore)}
           readyTime={recipe.readyInMinutes}
           serveAmount={recipe.servings}

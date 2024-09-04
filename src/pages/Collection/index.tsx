@@ -34,7 +34,7 @@ export const Collection = () => {
   };
 
   return (
-    <div className='col-span-full flex h-[50vh] flex-col gap-4'>
+    <div className='col-span-full flex min-h-[50vh] flex-col gap-4'>
       <div className='flex flex-row flex-wrap justify-between'>
         <h1 className='font-sans text-4xl font-bold'>Collection</h1>
         <Button
@@ -45,12 +45,12 @@ export const Collection = () => {
       </div>
 
       {recipes.length > 0 ? (
-        <ul className='grid grid-cols-auto-fill-225 gap-4'>
+        <ul className='grid gap-4 sm:grid-cols-auto-fill-225'>
           {recipes.map((recipe) => (
             <li key={recipe.id} className='flex flex-col gap-4'>
               <RecipeCardMinimal
                 id={recipe.id}
-                name={recipe.title}
+                title={recipe.title}
                 imagePath={recipe.image}
               />
 

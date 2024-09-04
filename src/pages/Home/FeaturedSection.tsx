@@ -19,12 +19,12 @@ export const FeaturedSection = () => {
       <h2 className='font-sans text-4xl font-bold'>Featured</h2>
       {recipes ? (
         <>
-          <ul className='grid grid-cols-auto-fill-225 gap-4'>
+          <ul className='grid gap-4 sm:grid-cols-auto-fill-225'>
             {recipes.map((recipe: RecipeMinimalProps) => (
               <li key={recipe.id}>
                 <RecipeCardMinimal
                   id={recipe.id}
-                  name={recipe.title}
+                  title={recipe.title}
                   imagePath={recipe.image}
                 />
               </li>
