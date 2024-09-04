@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import slugify from 'slugify';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
@@ -13,7 +12,8 @@ interface QueryFormElement extends HTMLFormElement {
 }
 
 export const SearchInput = () => {
-  const [query, setQuery] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [query, setQuery] = useState(searchParams.get('q') || '');
 
   const navigate = useNavigate();
 
@@ -22,7 +22,8 @@ export const SearchInput = () => {
     if (query === '') {
       return null;
     }
-    navigate(`/search?q=${slugify(query)}`);
+    setSearchParams({ q: query });
+    navigate(`/search?q=${encodeURIComponent(query)}`);
   }
 
   return (

@@ -44,7 +44,7 @@ const router = createBrowserRouter(
       />
       <Route path='/collection' element={<Collection />} />
       <Route
-        path='/search?q=:query'
+        path='/search'
         element={<Search />}
         errorElement={<ErrorBoundary />}
       />

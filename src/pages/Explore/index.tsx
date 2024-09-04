@@ -14,14 +14,14 @@ const CardList = lazy(() =>
           <li key={recipe.id}>
             <RecipeCardMinimal
               id={recipe.id}
-              name={recipe.title}
+              title={recipe.title}
               imagePath={recipe.image}
             />
           </li>
         ));
 
         return (
-          <ul className='grid grid-cols-auto-fill-225 gap-4'>{listItems}</ul>
+          <ul className='grid gap-4 sm:grid-cols-auto-fill-225'>{listItems}</ul>
         );
       },
     };
