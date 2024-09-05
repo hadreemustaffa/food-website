@@ -8,7 +8,7 @@ import { PopularSection } from './PopularSection';
 export const Home = () => {
   return (
     <>
-      <div className='relative col-span-full flex flex-col gap-6 overflow-hidden rounded-sm'>
+      <div className='relative col-span-full flex flex-col gap-6 overflow-hidden rounded-sm shadow-black-100 sm:shadow-sm'>
         <picture>
           <source
             media='(min-width: 576px)'

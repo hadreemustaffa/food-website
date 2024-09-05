@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBoxArchive, faSearch } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
 
 export const NavigationMenu = () => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -33,13 +34,17 @@ export const NavigationMenu = () => {
           <li>
             <Link to={'/explore'} onClick={() => setIsExpanded(false)}>
               <FontAwesomeIcon icon={faSearch} className='sm:hidden' />
-              <span className='hidden sm:block'>Explore</span>
+              <span className='hidden text-white hover:underline sm:block'>
+                Explore
+              </span>
             </Link>
           </li>
           <li>
             <Link to={'/collection'} onClick={() => setIsExpanded(false)}>
               <FontAwesomeIcon icon={faBoxArchive} className='sm:hidden' />
-              <span className='hidden sm:block'>Collection</span>
+              <span className='hidden text-white hover:underline sm:block'>
+                Collection
+              </span>
             </Link>
           </li>
         </ul>

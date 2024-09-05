@@ -15,7 +15,7 @@ export const FeaturedSection = () => {
   });
 
   return (
-    <div className='col-span-1 row-start-3 flex flex-col gap-4 sm:col-span-2 md:col-span-3 lg:col-span-4'>
+    <div className='col-span-full row-start-3 flex flex-col gap-4'>
       <h2 className='font-sans text-4xl font-bold'>Featured</h2>
       {recipes ? (
         <>

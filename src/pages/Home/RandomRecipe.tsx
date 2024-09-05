@@ -31,7 +31,7 @@ export const RandomRecipe = () => {
   }, []);
 
   return (
-    <div className='col-span-1 flex flex-col justify-between gap-4 sm:col-span-full lg:col-span-4'>
+    <div className='col-span-full flex flex-col justify-between gap-4'>
       <div className='flex flex-row flex-wrap justify-between'>
         <h2 className='font-sans text-4xl font-bold'>Random</h2>
         <Button
