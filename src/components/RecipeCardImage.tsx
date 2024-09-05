@@ -1,28 +1,22 @@
-import { useEffect, useState } from 'react';
-
+import fallbackSrc from '/image-fallback.svg';
 interface RecipeCardImageProps {
   src: string;
-  fallbackSrc: string;
   alt: string;
 }
 
-export const RecipeCardImage = ({
-  src,
-  fallbackSrc,
-  alt,
-}: RecipeCardImageProps) => {
-  const [error, setError] = useState(false);
-
-  useEffect(() => {
-    setError(false);
-  }, [src]);
-
+export const RecipeCardImage = ({ src, alt }: RecipeCardImageProps) => {
   return (
     <>
       <img
-        className='w-full object-cover'
-        src={error ? fallbackSrc : src}
-        onError={() => setError(true)}
+        className='h-full w-full object-cover'
+        src={src}
+        onError={({ currentTarget }) => {
+          currentTarget.onerror = null;
+          currentTarget.src = fallbackSrc;
+          currentTarget.style.width = '35%';
+          currentTarget.style.marginInline = 'auto';
+          currentTarget.style.paddingBlock = '1rem';
+        }}
         alt={alt}
       />
     </>
