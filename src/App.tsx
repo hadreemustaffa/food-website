@@ -14,7 +14,6 @@ import { Recipe } from './pages/Recipe';
 import { NotFound } from './pages/NotFound';
 import { Layout } from './components/Layout';
 import { Collection } from './pages/Collection';
-import { Search } from './pages/Search';
 
 export function ErrorBoundary() {
   let error = useRouteError();
@@ -43,11 +42,7 @@ const router = createBrowserRouter(
         errorElement={<ErrorBoundary />}
       />
       <Route path='/collection' element={<Collection />} />
-      <Route
-        path='/search'
-        element={<Search />}
-        errorElement={<ErrorBoundary />}
-      />
+      <Route path='search' lazy={() => import('./pages/Search')} />
       <Route path='/404' element={<NotFound />} />
       <Route path='*' element={<Navigate to='/404' replace />} />
     </Route>

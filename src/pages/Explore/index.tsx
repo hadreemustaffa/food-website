@@ -3,8 +3,9 @@ import { getExploreRecipesId } from '../../api/getRecipeData';
 
 import { RecipeMinimalProps } from '../../interfaces';
 import { RecipeCardMinimal } from '../../components/RecipeCard';
-import { CardListLoader } from '../../components/Skeleton';
-import { SearchInput } from '../../components/SearchInput';
+import { Loader } from '../../components/Loader';
+
+const LazySearchInput = lazy(() => import('../../components/SearchInput'));
 
 const CardList = lazy(() =>
   getExploreRecipesId().then((data) => {
@@ -33,9 +34,9 @@ export const Explore = () => {
     <div className='col-span-full flex flex-col gap-6'>
       <h1 className='sr-only'>Explore</h1>
 
-      <SearchInput />
+      <Suspense fallback={<Loader />}>
+        <LazySearchInput />
 
-      <Suspense fallback={<CardListLoader itemCount={8} />}>
         <CardList />
       </Suspense>
     </div>

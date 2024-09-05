@@ -11,8 +11,8 @@ interface QueryFormElement extends HTMLFormElement {
   readonly elements: FormElements;
 }
 
-export const SearchInput = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+const SearchInput = () => {
+  const [searchParams] = useSearchParams();
   const [query, setQuery] = useState(searchParams.get('q') || '');
 
   const navigate = useNavigate();
@@ -22,7 +22,6 @@ export const SearchInput = () => {
     if (query === '') {
       return null;
     }
-    setSearchParams({ q: query });
     navigate(`/search?q=${encodeURIComponent(query)}`);
   }
 
@@ -38,7 +37,7 @@ export const SearchInput = () => {
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           setQuery(e.target.value);
         }}
-        className='w-full border-none bg-black-transparent outline-none search-cancel:h-4 search-cancel:w-4 search-cancel:cursor-pointer search-cancel:appearance-none search-cancel:bg-[url(./xmark-solid.svg)] search-cancel:bg-center search-cancel:bg-no-repeat'
+        className='w-full border-none bg-black-transparent outline-none autofill:shadow-[inset_0_0_0px_1000px_white] search-cancel:h-4 search-cancel:w-4 search-cancel:cursor-pointer search-cancel:appearance-none search-cancel:bg-[url(./xmark-solid.svg)] search-cancel:bg-center search-cancel:bg-no-repeat'
         placeholder='Search'
       />
 
@@ -48,3 +47,5 @@ export const SearchInput = () => {
     </form>
   );
 };
+
+export default SearchInput;
