@@ -1,7 +1,7 @@
 export const Loader = () => {
   return (
     <>
-      <div role='status' className='col-span-full mx-auto'>
+      <div role='status' className='col-span-full mx-auto my-auto'>
         <svg
           aria-hidden='true'
           className='h-8 w-8 animate-spin fill-tomato-300 text-black-950'

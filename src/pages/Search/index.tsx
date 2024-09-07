@@ -10,6 +10,7 @@ import { getSearchRecipes } from '../../api/getRecipeData';
 import { Loader } from '../../components/Loader';
 import { RecipeCardMinimal } from '../../components/RecipeCard';
 import { RecipeMinimalProps } from '../../interfaces';
+import { CardListLoader } from '../../components/Skeleton';
 
 const LazySearchInput = lazy(() => import('../../components/SearchInput'));
 
@@ -30,27 +31,31 @@ export const Component = () => {
   }
 
   return (
-    <div className='col-span-full flex flex-col gap-6 p-4'>
+    <div className='col-span-full flex flex-col gap-6'>
       <LazySearchInput />
 
       <h1 className='font-sans text-4xl font-bold'>Search results:</h1>
 
-      {recipes.length > 0 ? (
-        <ul className='grid gap-4 sm:grid-cols-auto-fill-225'>
-          {recipes.map((recipe) => (
-            <li key={recipe.id}>
-              <RecipeCardMinimal
-                id={recipe.id}
-                title={recipe.title}
-                imagePath={recipe.image}
-              />
-            </li>
-          ))}
-        </ul>
+      {recipes ? (
+        recipes.length > 0 ? (
+          <ul className='grid gap-4 sm:grid-cols-auto-fill-225'>
+            {recipes.map((recipe) => (
+              <li key={recipe.id}>
+                <RecipeCardMinimal
+                  id={recipe.id}
+                  title={recipe.title}
+                  imagePath={recipe.image}
+                />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <>
+            <p>No results found</p>
+          </>
+        )
       ) : (
-        <div className='h-screen'>
-          <p>No results found</p>
-        </div>
+        <CardListLoader itemCount={4} />
       )}
     </div>
   );

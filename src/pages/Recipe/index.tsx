@@ -6,6 +6,7 @@ import parse from 'html-react-parser';
 import { Button } from '../../components/Button';
 import { RecipeDetailedProps } from '../../interfaces';
 import { Loader } from '../../components/Loader';
+import fallbackImageUrl from '/image-fallback.svg';
 
 type Nutrients = {
   name: string;
@@ -130,7 +131,7 @@ export const Recipe = () => {
 
   return (
     <>
-      <div className='flex flex-col gap-4 sm:col-span-full'>
+      <div className='col-span-full flex flex-col gap-4'>
         <div className='col-span-full flex flex-col justify-center gap-4'>
           <h1 className='font-sans text-4xl font-bold'>{recipe.title}</h1>
           <div className='flex flex-col flex-wrap gap-4 sm:flex-row sm:justify-between'>
@@ -166,11 +167,21 @@ export const Recipe = () => {
         </div>
 
         <div>
-          <img
-            className='mb-4 aspect-4/3 rounded-sm shadow-sm shadow-black-100 sm:float-left sm:mb-0 sm:mr-2 sm:max-w-60 md:mr-4 md:max-w-96'
-            src={recipe.image}
-            alt={recipe.title}
-          />
+          {recipe.image ? (
+            <img
+              className='mb-4 aspect-4/3 rounded-sm shadow-sm shadow-black-100 sm:float-left sm:mb-0 sm:mr-2 sm:max-w-60 md:mr-4 md:max-w-96'
+              src={recipe.image}
+              alt={recipe.title}
+            />
+          ) : (
+            <div className='mb-4 flex aspect-4/3 w-full items-center justify-center rounded-sm bg-black-950 p-8 shadow-sm shadow-black-100 sm:float-left sm:mb-0 sm:mr-2 sm:max-w-60 md:mr-4 md:max-w-96'>
+              <img
+                className='w-1/3'
+                src={fallbackImageUrl}
+                alt={recipe.title}
+              />
+            </div>
+          )}
 
           <p>{parse(`${recipe.summary}`)}</p>
         </div>
