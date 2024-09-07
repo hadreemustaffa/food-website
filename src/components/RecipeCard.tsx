@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { RecipeCardImage } from './RecipeCardImage';
+import { RecipeCardImage, RecipeCardNoImage } from './RecipeCardImage';
 
 interface RecipeCardDetailedProps {
   id: number;
@@ -30,7 +30,11 @@ export const RecipeCardDetailed = ({
       className='flex flex-col overflow-hidden rounded-sm text-left text-white shadow-sm shadow-black-100 sm:flex-row'
     >
       <div className='h-48 w-full lg:w-1/3'>
-        <RecipeCardImage src={imagePath} alt={`${title} recipe`} />
+        {imagePath ? (
+          <RecipeCardImage src={imagePath} alt={`${title} recipe`} />
+        ) : (
+          <RecipeCardNoImage />
+        )}
       </div>
 
       <div className='flex w-full flex-col justify-center gap-4 bg-black-950 p-4 md:p-8'>
@@ -64,13 +68,17 @@ export const RecipeCardMinimal = ({
   return (
     <Link
       to={`/recipe/${id}`}
-      className='xs:flex-row flex h-full flex-col overflow-hidden rounded-sm bg-black-950 text-left text-white shadow-sm shadow-black-100 sm:flex-col'
+      className='flex h-full flex-col overflow-hidden rounded-sm bg-black-950 text-left text-white shadow-sm shadow-black-100 xs:flex-row sm:flex-col'
     >
-      <div className='basis-1/2'>
-        <RecipeCardImage src={imagePath} alt={`${title} recipe`} />
+      <div className='basis-2/3'>
+        {imagePath ? (
+          <RecipeCardImage src={imagePath} alt={`${title} recipe`} />
+        ) : (
+          <RecipeCardNoImage />
+        )}
       </div>
 
-      <div className='flex basis-1/2 flex-col justify-center gap-2 p-4 sm:justify-start'>
+      <div className='flex basis-1/3 flex-col justify-center gap-2 p-4 sm:justify-start'>
         <p className='font-bold hover:text-tomato-300'>{title}</p>
       </div>
     </Link>
