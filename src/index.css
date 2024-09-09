@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* for recipe summaries that contains <a> tag */
 a:not([class]) {
   color: #ba3f1c;
   font-weight: bold;
