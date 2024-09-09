@@ -6,7 +6,7 @@ import { RecipeCardDetailed } from '../../components/RecipeCard';
 import { RecipeDetailedProps } from '../../interfaces';
 import { CardLoader } from '../../components/Skeleton';
 
-export const RandomRecipe = () => {
+const RandomRecipe = () => {
   const [recipe, setRecipe] = useState<RecipeDetailedProps | null>(null);
 
   const requestRandomRecipe = () => {
@@ -34,25 +34,12 @@ export const RandomRecipe = () => {
     <div className='col-span-full flex flex-col justify-between gap-4'>
       <div className='flex flex-row flex-wrap justify-between'>
         <h2 className='font-sans text-4xl font-bold'>Random</h2>
-        <Button
-          variant='secondary'
-          value='Get New Recipe'
-          onClick={requestRandomRecipe}
-        />
+        <Button variant='secondary' value='Get New Recipe' onClick={requestRandomRecipe} />
       </div>
 
-      {recipe ? (
-        <RecipeCardDetailed
-          title={recipe.title}
-          score={Math.floor(recipe.spoonacularScore)}
-          readyTime={recipe.readyInMinutes}
-          serveAmount={recipe.servings}
-          imagePath={recipe.image}
-          id={recipe.id}
-        />
-      ) : (
-        <CardLoader />
-      )}
+      {recipe ? <RecipeCardDetailed title={recipe.title} score={Math.floor(recipe.spoonacularScore)} readyTime={recipe.readyInMinutes} serveAmount={recipe.servings} imagePath={recipe.image} id={recipe.id} /> : <CardLoader />}
     </div>
   );
 };
+
+export default RandomRecipe;

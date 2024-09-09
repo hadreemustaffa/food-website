@@ -22,14 +22,11 @@ const SearchInput = () => {
     if (query === '') {
       return null;
     }
-    navigate(`/search?q=${encodeURIComponent(query)}`);
+    navigate(`/explore/search?q=${encodeURIComponent(query)}`);
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className='mx-auto flex w-full max-w-xl flex-row justify-between rounded-sm border-[1px] border-tomato-300 py-2 pl-2'
-    >
+    <form onSubmit={handleSubmit} className='mx-auto flex w-full max-w-xl flex-row justify-between rounded-sm border-[1px] border-tomato-300 py-2 pl-2'>
       <input
         type='search'
         name='query'

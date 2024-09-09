@@ -4,7 +4,7 @@ import { RecipeCardMinimal } from '../../components/RecipeCard';
 import { CardListLoader } from '../../components/Skeleton';
 import useFetchRecipeList from '../../hooks/useFetchRecipeList';
 
-export const PopularSection = () => {
+const PopularSection = () => {
   const recipes = useFetchRecipeList({
     storageKey: 'popular-recipes',
     request: async () => {
@@ -22,11 +22,7 @@ export const PopularSection = () => {
           <ul className='grid gap-4 sm:grid-cols-auto-fill-225'>
             {recipes.map((recipe) => (
               <li key={recipe.id}>
-                <RecipeCardMinimal
-                  id={recipe.id}
-                  title={recipe.title}
-                  imagePath={recipe.image}
-                />
+                <RecipeCardMinimal id={recipe.id} title={recipe.title} imagePath={recipe.image} />
               </li>
             ))}
           </ul>
@@ -37,3 +33,5 @@ export const PopularSection = () => {
     </div>
   );
 };
+
+export default PopularSection;
