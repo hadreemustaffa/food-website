@@ -59,15 +59,6 @@ const router = createBrowserRouter(
             </Suspense>
           }
         />
-        <Route
-          index
-          errorElement={<ErrorBoundary />}
-          element={
-            <Suspense fallback={<CardListLoader itemCount={8} />}>
-              <LazySearch />
-            </Suspense>
-          }
-        />
       </Route>
 
       <Route path='/recipe/:recipeId' errorElement={<ErrorBoundary />} element={<Recipe />} />
