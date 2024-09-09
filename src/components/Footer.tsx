@@ -1,11 +1,7 @@
 import { Link } from 'react-router-dom';
 import logo from '/logo.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faFacebook,
-  faInstagram,
-  faTwitter,
-} from '@fortawesome/free-brands-svg-icons';
+import { faFacebook, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
 import { ButtonIcon } from './Button';
 
@@ -20,15 +16,8 @@ export const Footer = () => {
         <div className='flex flex-col items-center gap-4 sm:items-start'>
           <img width={96} height={32} src={logo} alt='site logo' />
 
-          <ButtonIcon
-            onClick={handleClick}
-            className='border-2 border-tomato-200 px-4 py-2'
-            title='Back to Top'
-          >
-            <FontAwesomeIcon
-              icon={faArrowUp}
-              className='text-white hover:text-tomato-300'
-            />
+          <ButtonIcon onClick={handleClick} className='border-2 border-tomato-200 px-4 py-2' title='Back to Top'>
+            <FontAwesomeIcon icon={faArrowUp} className='text-white hover:text-tomato-300' />
           </ButtonIcon>
         </div>
 
@@ -52,16 +41,10 @@ export const Footer = () => {
           <p className='font-bold'>API</p>
 
           <div className='flex flex-col gap-4'>
-            <a
-              href='https://spoonacular.com/food-api'
-              className='text-black-100 hover:underline'
-            >
+            <a href='https://spoonacular.com/food-api' className='text-black-100 hover:underline'>
               Spoonacular
             </a>
-            <a
-              href='https://spoonacular.com/food-api/docs'
-              className='text-black-100 hover:underline'
-            >
+            <a href='https://spoonacular.com/food-api/docs' className='text-black-100 hover:underline'>
               Documentation
             </a>
           </div>
@@ -70,25 +53,13 @@ export const Footer = () => {
         <div className='flex flex-col gap-4'>
           <p className='font-bold'>Socials</p>
           <div className='flex flex-row gap-4'>
-            <Link
-              to={'https://www.facebook.com/'}
-              className='text-white hover:text-tomato-300'
-              aria-label='facebook homepage'
-            >
+            <Link to={'https://www.facebook.com/'} className='text-white hover:text-tomato-300' aria-label='facebook homepage'>
               <FontAwesomeIcon icon={faFacebook} className='h-4 w-4' />
             </Link>
-            <Link
-              to={'https://www.x.com/'}
-              className='text-white hover:text-tomato-300'
-              aria-label='twitter homepage'
-            >
+            <Link to={'https://www.x.com/'} className='text-white hover:text-tomato-300' aria-label='twitter homepage'>
               <FontAwesomeIcon icon={faTwitter} className='h-4 w-4' />
             </Link>
-            <Link
-              to={'https://www.instagram.com/'}
-              className='text-white hover:text-tomato-300'
-              aria-label='instagram homepage'
-            >
+            <Link to={'https://www.instagram.com/'} className='text-white hover:text-tomato-300' aria-label='instagram homepage'>
               <FontAwesomeIcon icon={faInstagram} className='h-4 w-4' />
             </Link>
           </div>
