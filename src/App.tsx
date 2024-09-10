@@ -9,6 +9,9 @@ import { Layout } from './components/Layout';
 import { Collection } from './pages/Collection';
 import { CardListLoader } from './components/Skeleton';
 
+import { loader as exploreCardListLoader } from './pages/Explore/ExploreCardList';
+import { loader as searchLoader } from './pages/Explore/Search';
+
 const LazyExploreCardList = lazy(() => import('./pages/Explore/ExploreCardList'));
 const LazySearch = lazy(() => import('./pages/Explore/Search'));
 
@@ -44,6 +47,7 @@ const router = createBrowserRouter(
         <Route
           index
           errorElement={<ErrorBoundary />}
+          loader={exploreCardListLoader}
           element={
             <Suspense fallback={<CardListLoader itemCount={8} />}>
               <LazyExploreCardList />
@@ -53,8 +57,9 @@ const router = createBrowserRouter(
         <Route
           path='/explore/search'
           errorElement={<ErrorBoundary />}
+          loader={searchLoader}
           element={
-            <Suspense fallback={<CardListLoader itemCount={8} />}>
+            <Suspense fallback={<CardListLoader itemCount={4} />}>
               <LazySearch />
             </Suspense>
           }

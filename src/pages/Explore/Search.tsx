@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { getSearchRecipes } from '../../api/getRecipeData';
 
@@ -5,17 +6,29 @@ import { RecipeCardMinimal } from '../../components/RecipeCard';
 import { RecipeMinimalProps } from '../../interfaces';
 import { CardListLoader } from '../../components/Skeleton';
 
+interface SearchProps {
+  recipes: RecipeMinimalProps[];
+  query: string;
+}
+
 export async function loader({ request }: { request: Request }) {
   const url = new URL(request.url);
   const query = url.searchParams.get('q') || '';
   const formatQuery = decodeURIComponent(query.replace(/\+/g, ' '));
 
-  let data = await getSearchRecipes(formatQuery);
-  return data;
+  const recipes = await getSearchRecipes(formatQuery);
+  return { recipes, query };
 }
 
 const Search = () => {
-  let recipes = useLoaderData() as RecipeMinimalProps[];
+  const { recipes, query } = useLoaderData() as SearchProps;
+
+  useEffect(() => {
+    const input = document.getElementById('q') as HTMLInputElement;
+    if (input) {
+      input.value = query;
+    }
+  }, [query]);
 
   return (
     <div className='col-span-full flex flex-col gap-6'>
