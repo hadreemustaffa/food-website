@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { Suspense, useEffect } from 'react';
+import { Await, defer, useLoaderData } from 'react-router-dom';
 import { getSearchRecipes } from '../../api/getRecipeData';
 
 import { RecipeCardMinimal } from '../../components/RecipeCard';
@@ -16,11 +16,11 @@ export async function loader({ request }: { request: Request }) {
   const query = url.searchParams.get('q') || '';
   const formatQuery = decodeURIComponent(query.replace(/\+/g, ' '));
 
-  const recipes = await getSearchRecipes(formatQuery);
-  return { recipes, query };
+  const recipes = getSearchRecipes(formatQuery);
+  return defer({ recipes, query });
 }
 
-const Search = () => {
+export const Search = () => {
   const { recipes, query } = useLoaderData() as SearchProps;
 
   useEffect(() => {
@@ -33,26 +33,19 @@ const Search = () => {
   return (
     <div className='col-span-full flex flex-col gap-6'>
       <h1 className='font-sans text-3xl font-bold'>Search results:</h1>
-
-      {recipes ? (
-        recipes.length > 0 ? (
-          <ul className='grid gap-4 sm:grid-cols-auto-fill-225'>
-            {recipes.map((recipe) => (
-              <li key={recipe.id}>
-                <RecipeCardMinimal id={recipe.id} title={recipe.title} imagePath={recipe.image} />
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <>
-            <p>No results found</p>
-          </>
-        )
-      ) : (
-        <CardListLoader itemCount={4} />
-      )}
+      <Suspense fallback={<CardListLoader itemCount={4} />}>
+        <Await resolve={recipes}>
+          {(recipes) => (
+            <ul className='grid gap-4 sm:grid-cols-auto-fill-225'>
+              {recipes.map((recipe: RecipeMinimalProps) => (
+                <li key={recipe.id}>
+                  <RecipeCardMinimal id={recipe.id} title={recipe.title} imagePath={recipe.image} />
+                </li>
+              ))}
+            </ul>
+          )}
+        </Await>
+      </Suspense>
     </div>
   );
 };
-
-export default Search;

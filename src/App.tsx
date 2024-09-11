@@ -1,4 +1,3 @@
-import { lazy, Suspense } from 'react';
 import { createBrowserRouter, createRoutesFromElements, isRouteErrorResponse, Link, Navigate, Route, RouterProvider, useRouteError } from 'react-router-dom';
 
 import { Home } from './pages/Home';
@@ -7,13 +6,8 @@ import { Recipe } from './pages/Recipe';
 import { NotFound } from './pages/NotFound';
 import { Layout } from './components/Layout';
 import { Collection } from './pages/Collection';
-import { CardListLoader } from './components/Skeleton';
-
-import { loader as exploreCardListLoader } from './pages/Explore/ExploreCardList';
-import { loader as searchLoader } from './pages/Explore/Search';
-
-const LazyExploreCardList = lazy(() => import('./pages/Explore/ExploreCardList'));
-const LazySearch = lazy(() => import('./pages/Explore/Search'));
+import { ExploreCardList, loader as exploreCardListLoader } from './pages/Explore/ExploreCardList';
+import { Search, loader as searchLoader } from './pages/Explore/Search';
 
 export function ErrorBoundary() {
   let error = useRouteError();
@@ -44,26 +38,8 @@ const router = createBrowserRouter(
       <Route path='/' element={<Home />} errorElement={<ErrorBoundary />} />
 
       <Route path='/explore' errorElement={<ErrorBoundary />} element={<Explore />}>
-        <Route
-          index
-          errorElement={<ErrorBoundary />}
-          loader={exploreCardListLoader}
-          element={
-            <Suspense fallback={<CardListLoader itemCount={8} />}>
-              <LazyExploreCardList />
-            </Suspense>
-          }
-        />
-        <Route
-          path='/explore/search'
-          errorElement={<ErrorBoundary />}
-          loader={searchLoader}
-          element={
-            <Suspense fallback={<CardListLoader itemCount={4} />}>
-              <LazySearch />
-            </Suspense>
-          }
-        />
+        <Route index loader={exploreCardListLoader} errorElement={<ErrorBoundary />} element={<ExploreCardList />} />
+        <Route path='/explore/search' loader={searchLoader} errorElement={<ErrorBoundary />} element={<Search />} />
       </Route>
 
       <Route path='/recipe/:recipeId' errorElement={<ErrorBoundary />} element={<Recipe />} />
