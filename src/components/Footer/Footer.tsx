@@ -3,7 +3,7 @@ import logo from '/logo.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
-import { ButtonIcon } from './Button';
+import { ButtonIcon } from '@components/Button/Button';
 
 const handleClick = () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });

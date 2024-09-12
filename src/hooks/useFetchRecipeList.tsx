@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { RecipeMinimalProps } from '../interfaces';
+import { RecipeMinimalProps } from '@/interfaces';
 
 type StorageKey = 'featured-recipes' | 'popular-recipes' | 'saved-recipes';
 

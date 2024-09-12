@@ -1,7 +1,7 @@
 import { lazy } from 'react';
 import { Link } from 'react-router-dom';
 
-const LazySearchInput = lazy(() => import('../../components/SearchInput'));
+const LazySearchInput = lazy(() => import('@components/SearchInput/SearchInput'));
 
 export const NotFound = () => {
   return (

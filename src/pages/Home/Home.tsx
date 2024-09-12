@@ -1,12 +1,14 @@
+import { lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Button } from '../../components/Button';
-import { lazy, Suspense } from 'react';
-import { CardListLoader } from '../../components/Skeleton';
+import { Button } from '@components/Button/Button';
+import { CardListLoader } from '@components/Skeleton';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faExplosion } from '@fortawesome/free-solid-svg-icons';
 
-const LazyFeatured = lazy(() => import('./FeaturedSection'));
-const LazyPopular = lazy(() => import('./PopularSection'));
-const LazyRandom = lazy(() => import('./RandomRecipe'));
+const LazyFeatured = lazy(() => import('./Featured/Featured'));
+const LazyPopular = lazy(() => import('./Popular/Popular'));
+const LazyRandom = lazy(() => import('./Random/Random'));
 
 export const Home = () => {
   return (
@@ -21,7 +23,9 @@ export const Home = () => {
         <div className='flex flex-col justify-end gap-4 md:absolute md:h-full md:w-1/3 md:bg-opacity-5 md:bg-gradient-to-r md:from-black-950 md:to-black-transparent md:p-8 md:pr-0 md:text-white lg:w-1/2 lg:justify-center'>
           <h1 className='text-4xl font-bold leading-none md:text-5xl md:leading-tight'>QUICK & EASY DELIGHTS</h1>
           <Link to='/explore'>
-            <Button variant='primary' value='EXPLORE RECIPES' />
+            <Button variant='primary' value='EXPLORE RECIPES'>
+              <FontAwesomeIcon icon={faExplosion} />
+            </Button>
           </Link>
         </div>
       </div>

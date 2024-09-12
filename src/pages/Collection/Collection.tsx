@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { RecipeMinimalProps } from '../../interfaces';
-import { RecipeCardMinimal } from '../../components/RecipeCard';
-import { Button } from '../../components/Button';
+import { RecipeMinimalProps } from '@/interfaces';
+import { Button } from '@components/Button/Button';
+import { RecipeCardMinimal } from '@components/RecipeCard/RecipeCard';
 
 export const Collection = () => {
   const [recipes, setRecipes] = useState<RecipeMinimalProps[]>([]);

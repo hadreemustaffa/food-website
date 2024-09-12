@@ -1,9 +1,10 @@
-import { getFeaturedSectionRecipesId } from '../../api/getRecipeData';
+import { getFeaturedSectionRecipesId } from '@/api/getRecipeData';
 
-import { RecipeCardMinimal } from '../../components/RecipeCard';
-import { RecipeMinimalProps } from '../../interfaces';
-import { CardListLoader } from '../../components/Skeleton';
-import useFetchRecipeList from '../../hooks/useFetchRecipeList';
+import { RecipeMinimalProps } from '@/interfaces';
+import useFetchRecipeList from '@/hooks/useFetchRecipeList';
+
+import { CardListLoader } from '@components/Skeleton';
+import { RecipeCardMinimal } from '@components/RecipeCard/RecipeCard';
 
 const FeaturedSection = () => {
   const recipes = useFetchRecipeList({

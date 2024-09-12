@@ -1,13 +1,13 @@
 import { createBrowserRouter, createRoutesFromElements, isRouteErrorResponse, Link, Navigate, Route, RouterProvider, useRouteError } from 'react-router-dom';
 
-import { Home } from './pages/Home';
-import { Explore } from './pages/Explore';
-import { Recipe } from './pages/Recipe';
-import { NotFound } from './pages/NotFound';
-import { Layout } from './components/Layout';
-import { Collection } from './pages/Collection';
-import { ExploreCardList, loader as exploreCardListLoader } from './pages/Explore/ExploreCardList';
-import { Search, loader as searchLoader } from './pages/Explore/Search';
+import { Home } from './pages/Home/Home';
+import { Explore } from './pages/Explore/Explore';
+import { Recipe } from './pages/Recipe/Recipe';
+import { NotFound } from './pages/NotFound/NotFound';
+import { Layout } from './components/Layout/Layout';
+import { Collection } from './pages/Collection/Collection';
+import { CardList, loader as cardListLoader } from './pages/Explore/CardList/CardList';
+import { Search, loader as searchLoader } from './pages/Explore/Search/Search';
 
 export function ErrorBoundary() {
   let error = useRouteError();
@@ -38,7 +38,7 @@ const router = createBrowserRouter(
       <Route path='/' element={<Home />} errorElement={<ErrorBoundary />} />
 
       <Route path='/explore' errorElement={<ErrorBoundary />} element={<Explore />}>
-        <Route index loader={exploreCardListLoader} errorElement={<ErrorBoundary />} element={<ExploreCardList />} />
+        <Route index loader={cardListLoader} errorElement={<ErrorBoundary />} element={<CardList />} />
         <Route path='/explore/search' loader={searchLoader} errorElement={<ErrorBoundary />} element={<Search />} />
       </Route>
 

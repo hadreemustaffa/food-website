@@ -1,8 +1,9 @@
-import { getPopularSectionRecipesId } from '../../api/getRecipeData';
+import { getPopularSectionRecipesId } from '@/api/getRecipeData';
 
-import { RecipeCardMinimal } from '../../components/RecipeCard';
-import { CardListLoader } from '../../components/Skeleton';
-import useFetchRecipeList from '../../hooks/useFetchRecipeList';
+import useFetchRecipeList from '@/hooks/useFetchRecipeList';
+
+import { RecipeCardMinimal } from '@components/RecipeCard/RecipeCard';
+import { CardListLoader } from '@components/Skeleton';
 
 const PopularSection = () => {
   const recipes = useFetchRecipeList({

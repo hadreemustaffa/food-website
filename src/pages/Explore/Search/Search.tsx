@@ -1,10 +1,11 @@
 import { Suspense, useEffect } from 'react';
 import { Await, defer, useLoaderData } from 'react-router-dom';
-import { getSearchRecipes } from '../../api/getRecipeData';
+import { getSearchRecipes } from '@/api/getRecipeData';
 
-import { RecipeCardMinimal } from '../../components/RecipeCard';
-import { RecipeMinimalProps } from '../../interfaces';
-import { CardListLoader } from '../../components/Skeleton';
+import { RecipeMinimalProps } from '@/interfaces';
+
+import { RecipeCardMinimal } from '@components/RecipeCard/RecipeCard';
+import { CardListLoader } from '@components/Skeleton';
 
 interface SearchProps {
   recipes: RecipeMinimalProps[];

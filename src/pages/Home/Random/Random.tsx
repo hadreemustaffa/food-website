@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { getRandomRecipe } from '../../api/getRecipeData';
+import { getRandomRecipe } from '../../../api/getRecipeData';
 
-import { Button } from '../../components/Button';
-import { RecipeCardDetailed } from '../../components/RecipeCard';
-import { RecipeDetailedProps } from '../../interfaces';
-import { CardLoader } from '../../components/Skeleton';
+import { Button } from '../../../components/Button/Button';
+import { RecipeCardDetailed } from '../../../components/RecipeCard/RecipeCard';
+import { RecipeDetailedProps } from '../../../interfaces';
+import { CardLoader } from '../../../components/Skeleton';
 
 const RandomRecipe = () => {
   const [recipe, setRecipe] = useState<RecipeDetailedProps | null>(null);

@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import SearchInput from '../../components/SearchInput';
+import SearchInput from '@components/SearchInput/SearchInput';
 
 export const Explore = () => {
   return (

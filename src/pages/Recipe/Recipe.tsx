@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getDetailedRecipeInformation } from '../../api/getRecipeData';
+import { getDetailedRecipeInformation } from '@/api/getRecipeData';
 import parse from 'html-react-parser';
 
-import { Button } from '../../components/Button';
+import { Button } from '../../components/Button/Button';
 import { RecipeDetailedProps } from '../../interfaces';
-import { Loader } from '../../components/Loader';
+import { Loader } from '../../components/Loader/Loader';
 import fallbackImageUrl from '/image-fallback.svg';
 
 type Nutrients = {

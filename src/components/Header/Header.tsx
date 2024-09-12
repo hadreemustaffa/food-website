@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 import logo from '/logo.svg';
-import { NavigationMenu } from './NavigationMenu';
+import { NavigationMenu } from '@components/NavigationMenu/NavigationMenu';
 
 export const Header = () => {
   return (

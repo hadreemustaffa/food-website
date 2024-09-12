@@ -1,10 +1,10 @@
 import { Suspense } from 'react';
 import { Await, defer, useLoaderData } from 'react-router-dom';
-import { getExploreRecipesId } from '../../api/getRecipeData';
+import { getExploreRecipesId } from '@/api/getRecipeData';
+import { RecipeMinimalProps } from '@/interfaces';
 
-import { RecipeCardMinimal } from '../../components/RecipeCard';
-import { RecipeMinimalProps } from '../../interfaces';
-import { CardListLoader } from '../../components/Skeleton';
+import { RecipeCardMinimal } from '@components/RecipeCard/RecipeCard';
+import { CardListLoader } from '@components/Skeleton';
 
 interface ExploreCardListProps {
   recipes: RecipeMinimalProps[];
@@ -15,7 +15,7 @@ export async function loader() {
   return recipes;
 }
 
-export const ExploreCardList = () => {
+export const CardList = () => {
   const { recipes } = useLoaderData() as ExploreCardListProps;
 
   return (
