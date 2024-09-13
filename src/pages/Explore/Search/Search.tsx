@@ -5,7 +5,7 @@ import { getSearchRecipes } from '@/api/getRecipeData';
 import { RecipeMinimalProps } from '@/interfaces';
 
 import { RecipeCardMinimal } from '@components/RecipeCard/RecipeCard';
-import { CardListLoader } from '@components/Skeleton';
+import { CardListLoader } from '@components/Skeleton/Skeleton';
 
 interface SearchProps {
   recipes: RecipeMinimalProps[];

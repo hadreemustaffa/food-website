@@ -4,7 +4,7 @@ import { RecipeMinimalProps } from '@/interfaces';
 import useFetchRecipeList from '@/hooks/useFetchRecipeList';
 
 import { RecipeCardMinimal } from '@components/RecipeCard/RecipeCard';
-import { CardListLoader } from '@components/Skeleton';
+import { CardListLoader } from '@components/Skeleton/Skeleton';
 
 const FeaturedSection = () => {
   const recipes = useFetchRecipeList({

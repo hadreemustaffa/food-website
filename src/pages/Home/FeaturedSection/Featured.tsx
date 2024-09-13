@@ -3,7 +3,7 @@ import { getFeaturedSectionRecipesId } from '@/api/getRecipeData';
 import { RecipeMinimalProps } from '@/interfaces';
 import useFetchRecipeList from '@/hooks/useFetchRecipeList';
 
-import { CardListLoader } from '@components/Skeleton';
+import { CardListLoader } from '@components/Skeleton/Skeleton';
 import { RecipeCardMinimal } from '@components/RecipeCard/RecipeCard';
 
 const FeaturedSection = () => {

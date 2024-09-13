@@ -6,8 +6,8 @@ import { Recipe } from './pages/Recipe/Recipe';
 import { NotFound } from './pages/NotFound/NotFound';
 import { Layout } from './components/Layout/Layout';
 import { Collection } from './pages/Collection/Collection';
-import { CardList, loader as cardListLoader } from './pages/Explore/CardList/CardList';
 import { Search, loader as searchLoader } from './pages/Explore/Search/Search';
+import { CardList, loader as cardListLoader } from './pages/Explore/CardList/CardList';
 
 export function ErrorBoundary() {
   let error = useRouteError();

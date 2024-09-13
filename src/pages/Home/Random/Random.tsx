@@ -4,7 +4,7 @@ import { getRandomRecipe } from '../../../api/getRecipeData';
 import { Button } from '../../../components/Button/Button';
 import { RecipeCardDetailed } from '../../../components/RecipeCard/RecipeCard';
 import { RecipeDetailedProps } from '../../../interfaces';
-import { CardLoader } from '../../../components/Skeleton';
+import { CardLoader } from '../../../components/Skeleton/Skeleton';
 
 const RandomRecipe = () => {
   const [recipe, setRecipe] = useState<RecipeDetailedProps | null>(null);

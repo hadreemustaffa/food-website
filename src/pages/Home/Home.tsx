@@ -2,7 +2,7 @@ import { lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Button } from '@components/Button/Button';
-import { CardListLoader } from '@components/Skeleton';
+import { CardListLoader } from '@components/Skeleton/Skeleton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExplosion } from '@fortawesome/free-solid-svg-icons';
 

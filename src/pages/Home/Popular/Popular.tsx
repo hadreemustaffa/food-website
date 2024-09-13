@@ -3,7 +3,7 @@ import { getPopularSectionRecipesId } from '@/api/getRecipeData';
 import useFetchRecipeList from '@/hooks/useFetchRecipeList';
 
 import { RecipeCardMinimal } from '@components/RecipeCard/RecipeCard';
-import { CardListLoader } from '@components/Skeleton';
+import { CardListLoader } from '@components/Skeleton/Skeleton';
 
 const PopularSection = () => {
   const recipes = useFetchRecipeList({
