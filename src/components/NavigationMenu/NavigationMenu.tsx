@@ -11,7 +11,11 @@ export const NavigationMenu = () => {
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
-      if (isExpanded && ref.current && !ref.current.contains(e.target as Node)) {
+      if (
+        isExpanded &&
+        ref.current &&
+        !ref.current.contains(e.target as Node)
+      ) {
         setIsExpanded(false);
       }
     };
@@ -30,13 +34,17 @@ export const NavigationMenu = () => {
           <li>
             <Link to={'/explore'} onClick={() => setIsExpanded(false)}>
               <FontAwesomeIcon icon={faSearch} className='sm:hidden' />
-              <span className='hidden text-white hover:underline sm:block'>Explore</span>
+              <span className='hidden text-white hover:underline sm:block'>
+                Explore
+              </span>
             </Link>
           </li>
           <li>
             <Link to={'/collection'} onClick={() => setIsExpanded(false)}>
               <FontAwesomeIcon icon={faBoxArchive} className='sm:hidden' />
-              <span className='hidden text-white hover:underline sm:block'>Collection</span>
+              <span className='hidden text-white hover:underline sm:block'>
+                Collection
+              </span>
             </Link>
           </li>
         </ul>

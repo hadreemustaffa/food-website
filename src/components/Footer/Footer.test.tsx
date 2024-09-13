@@ -21,7 +21,10 @@ describe('Should render a footer', () => {
 describe('Should render a Back To Top button', () => {
   test('renders', () => {
     render(
-      <ButtonIcon className='border-2 border-tomato-200 px-4 py-2' title='Back to Top'>
+      <ButtonIcon
+        className='border-2 border-tomato-200 px-4 py-2'
+        title='Back to Top'
+      >
         Button
       </ButtonIcon>
     );

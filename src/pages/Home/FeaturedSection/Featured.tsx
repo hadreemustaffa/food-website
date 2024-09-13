@@ -23,7 +23,11 @@ const FeaturedSection = () => {
           <ul className='grid gap-4 sm:grid-cols-auto-fill-225'>
             {recipes.map((recipe: RecipeMinimalProps) => (
               <li key={recipe.id}>
-                <RecipeCardMinimal id={recipe.id} title={recipe.title} imagePath={recipe.image} />
+                <RecipeCardMinimal
+                  id={recipe.id}
+                  title={recipe.title}
+                  imagePath={recipe.image}
+                />
               </li>
             ))}
           </ul>

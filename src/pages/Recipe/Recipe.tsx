@@ -54,9 +54,12 @@ export const Recipe = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const savedRecipesList: RecipeProps[] | null = await localforage.getItem('saved-recipes');
+        const savedRecipesList: RecipeProps[] | null =
+          await localforage.getItem('saved-recipes');
 
-        const savedRecipe = savedRecipesList?.find((recipe: RecipeProps) => `${recipe.id}` === recipeId);
+        const savedRecipe = savedRecipesList?.find(
+          (recipe: RecipeProps) => `${recipe.id}` === recipeId
+        );
 
         if (savedRecipe) {
           setRecipe(savedRecipe);
@@ -82,8 +85,11 @@ export const Recipe = () => {
 
   const handleSaveRecipe = async () => {
     try {
-      const savedRecipesList: RecipeProps[] | null = await localforage.getItem('saved-recipes');
-      const isRecipeSaved = savedRecipesList?.some((savedRecipe: RecipeProps) => savedRecipe.id === recipe?.id);
+      const savedRecipesList: RecipeProps[] | null =
+        await localforage.getItem('saved-recipes');
+      const isRecipeSaved = savedRecipesList?.some(
+        (savedRecipe: RecipeProps) => savedRecipe.id === recipe?.id
+      );
 
       if (!isRecipeSaved) {
         const updatedRecipes = [recipe, ...(savedRecipesList || [])];
@@ -100,8 +106,12 @@ export const Recipe = () => {
 
   const handleDeleteRecipe = async () => {
     try {
-      const savedRecipesList: RecipeProps[] | null = await localforage.getItem('saved-recipes');
-      const updatedRecipes = savedRecipesList?.filter((recipe: RecipeProps) => `${recipe.id}` !== recipeId) || [];
+      const savedRecipesList: RecipeProps[] | null =
+        await localforage.getItem('saved-recipes');
+      const updatedRecipes =
+        savedRecipesList?.filter(
+          (recipe: RecipeProps) => `${recipe.id}` !== recipeId
+        ) || [];
 
       await localforage.setItem('saved-recipes', updatedRecipes);
 
@@ -111,7 +121,15 @@ export const Recipe = () => {
     }
   };
 
-  const nutrientList = ['Fat', 'Carbohydrates', 'Protein', 'Sugar', 'Cholesterol', 'Fiber', 'Calcium'];
+  const nutrientList = [
+    'Fat',
+    'Carbohydrates',
+    'Protein',
+    'Sugar',
+    'Cholesterol',
+    'Fiber',
+    'Calcium',
+  ];
 
   return (
     <>
@@ -124,7 +142,9 @@ export const Recipe = () => {
                 <div className='flex flex-row gap-4'>
                   <div>
                     <p className='text-sm'>Score</p>
-                    <p className='font-bold'>{recipe.spoonacularScore.toFixed(0)}</p>
+                    <p className='font-bold'>
+                      {recipe.spoonacularScore.toFixed(0)}
+                    </p>
                   </div>
                   <div className='border-l border-tomato-200 pl-4'>
                     <p className='text-sm'>Ready In</p>
@@ -136,20 +156,34 @@ export const Recipe = () => {
                   </div>
                   <div className='border-l border-tomato-200 pl-4'>
                     <p className='text-sm'>Calorie</p>
-                    <p className='font-bold'>{recipe.nutrition.nutrients[0].amount.toFixed(0)}</p>
+                    <p className='font-bold'>
+                      {recipe.nutrition.nutrients[0].amount.toFixed(0)}
+                    </p>
                   </div>
                 </div>
 
-                <Button variant='primary' value='Go to Recipe' onClick={handleScrollToRecipe} />
+                <Button
+                  variant='primary'
+                  value='Go to Recipe'
+                  onClick={handleScrollToRecipe}
+                />
               </div>
             </div>
 
             <div>
               {recipe.image ? (
-                <img className='mb-4 aspect-4/3 rounded-sm shadow-sm shadow-black-100 sm:float-left sm:mb-0 sm:mr-2 sm:max-w-60 md:mr-4 md:max-w-96' src={recipe.image} alt={recipe.title} />
+                <img
+                  className='mb-4 aspect-4/3 rounded-sm shadow-sm shadow-black-100 sm:float-left sm:mb-0 sm:mr-2 sm:max-w-60 md:mr-4 md:max-w-96'
+                  src={recipe.image}
+                  alt={recipe.title}
+                />
               ) : (
                 <div className='mb-4 flex aspect-4/3 w-full items-center justify-center rounded-sm bg-black-950 p-8 shadow-sm shadow-black-100 sm:float-left sm:mb-0 sm:mr-2 sm:max-w-60 md:mr-4 md:max-w-96'>
-                  <img className='w-1/3' src={fallbackImageUrl} alt={recipe.title} />
+                  <img
+                    className='w-1/3'
+                    src={fallbackImageUrl}
+                    alt={recipe.title}
+                  />
                 </div>
               )}
 
@@ -183,27 +217,43 @@ export const Recipe = () => {
             <div id='recipeSection' className='flex flex-col gap-4'>
               <h2 className='font-sans text-3xl font-bold'>Ingredients</h2>
               <ul className='flex list-disc flex-col gap-2 pl-4 marker:text-tomato-300'>
-                {recipe.extendedIngredients.map((ingredient: Ingredients, index) => {
-                  return (
-                    <li key={index}>
-                      <p>{ingredient.original}</p>
-                    </li>
-                  );
-                })}
+                {recipe.extendedIngredients.map(
+                  (ingredient: Ingredients, index) => {
+                    return (
+                      <li key={index}>
+                        <p>{ingredient.original}</p>
+                      </li>
+                    );
+                  }
+                )}
               </ul>
             </div>
             <div className='flex flex-col gap-4'>
               <h2 className='font-sans text-3xl font-bold'>Instructions</h2>
               <ol className='flex list-decimal flex-col gap-2 pl-4 marker:font-bold marker:text-tomato-300'>
-                {recipe.analyzedInstructions[0].steps.map((step: Step, index) => {
-                  return (
-                    <li key={index}>
-                      <p>{step.step}</p>
-                    </li>
-                  );
-                })}
+                {recipe.analyzedInstructions[0].steps.map(
+                  (step: Step, index) => {
+                    return (
+                      <li key={index}>
+                        <p>{step.step}</p>
+                      </li>
+                    );
+                  }
+                )}
               </ol>
-              {isSaved ? <Button variant='secondary' value='Recipe Saved' onClick={handleDeleteRecipe} /> : <Button variant='secondary' value='Save This Recipe' onClick={handleSaveRecipe} />}
+              {isSaved ? (
+                <Button
+                  variant='secondary'
+                  value='Recipe Saved'
+                  onClick={handleDeleteRecipe}
+                />
+              ) : (
+                <Button
+                  variant='secondary'
+                  value='Save This Recipe'
+                  onClick={handleSaveRecipe}
+                />
+              )}
             </div>
           </div>
         </>

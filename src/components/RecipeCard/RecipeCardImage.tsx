@@ -7,7 +7,11 @@ interface RecipeCardImageProps {
 export const RecipeCardImage = ({ src, alt }: RecipeCardImageProps) => {
   return (
     <>
-      <img className='aspect-4/3 h-full w-full object-cover' src={src} alt={alt} />
+      <img
+        className='aspect-4/3 h-full w-full object-cover'
+        src={src}
+        alt={alt}
+      />
     </>
   );
 };

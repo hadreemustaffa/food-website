@@ -1,5 +1,11 @@
 import { Suspense, useEffect, useState } from 'react';
-import { Await, defer, NavigationType, useLoaderData, useNavigationType } from 'react-router-dom';
+import {
+  Await,
+  defer,
+  NavigationType,
+  useLoaderData,
+  useNavigationType,
+} from 'react-router-dom';
 import { getExploreRecipesId } from '@/api/getRecipeData';
 import { RecipeMinimalProps } from '@/interfaces';
 
@@ -18,12 +24,15 @@ export async function loader() {
 
 export const CardList = () => {
   const { recipes } = useLoaderData() as ExploreCardListProps;
-  const [storedRecipes, setStoredRecipes] = useState<RecipeMinimalProps[] | null>(null);
+  const [storedRecipes, setStoredRecipes] = useState<
+    RecipeMinimalProps[] | null
+  >(null);
   const navigationType = useNavigationType();
 
   useEffect(() => {
     const fetchSavedRecipes = async () => {
-      const savedRecipes = await localforage.getItem<RecipeMinimalProps[]>('explore-recipes');
+      const savedRecipes =
+        await localforage.getItem<RecipeMinimalProps[]>('explore-recipes');
       if (savedRecipes) {
         setStoredRecipes(savedRecipes);
       }
@@ -56,11 +65,17 @@ export const CardList = () => {
           {(recipes) => {
             return (
               <ul className='grid gap-4 sm:grid-cols-auto-fill-225'>
-                {(storedRecipes || recipes).map((recipe: RecipeMinimalProps) => (
-                  <li key={recipe.id}>
-                    <RecipeCardMinimal id={recipe.id} title={recipe.title} imagePath={recipe.image} />
-                  </li>
-                ))}
+                {(storedRecipes || recipes).map(
+                  (recipe: RecipeMinimalProps) => (
+                    <li key={recipe.id}>
+                      <RecipeCardMinimal
+                        id={recipe.id}
+                        title={recipe.title}
+                        imagePath={recipe.image}
+                      />
+                    </li>
+                  )
+                )}
               </ul>
             );
           }}
