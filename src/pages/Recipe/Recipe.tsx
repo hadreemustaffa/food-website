@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getDetailedRecipeInformation } from '@/api/getRecipeData';
 import parse from 'html-react-parser';
+import localforage from 'localforage';
 
 import { Button } from '../../components/Button/Button';
 import { RecipeDetailedProps } from '../../interfaces';
@@ -52,17 +53,21 @@ export const Recipe = () => {
 
   useEffect(() => {
     const getData = async () => {
-      const savedRecipesList = JSON.parse(localStorage.getItem('saved-recipes') || '[]');
+      try {
+        const savedRecipesList: RecipeProps[] | null = await localforage.getItem('saved-recipes');
 
-      const savedRecipe = savedRecipesList.find((recipe: RecipeProps) => `${recipe.id}` === recipeId);
+        const savedRecipe = savedRecipesList?.find((recipe: RecipeProps) => `${recipe.id}` === recipeId);
 
-      if (savedRecipe) {
-        setRecipe(savedRecipe);
-        setIsSaved(true);
-      } else {
-        const data = await getDetailedRecipeInformation(recipeId);
-        setRecipe(data);
-        setIsSaved(false);
+        if (savedRecipe) {
+          setRecipe(savedRecipe);
+          setIsSaved(true);
+        } else {
+          const data = await getDetailedRecipeInformation(recipeId);
+          setRecipe(data);
+          setIsSaved(false);
+        }
+      } catch (error) {
+        console.error('Error fetching recipe data:', error);
       }
     };
 
@@ -75,29 +80,35 @@ export const Recipe = () => {
     section?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
-  const handleSaveRecipe = () => {
-    const savedRecipesList = JSON.parse(localStorage.getItem('saved-recipes') || '[]');
+  const handleSaveRecipe = async () => {
+    try {
+      const savedRecipesList: RecipeProps[] | null = await localforage.getItem('saved-recipes');
+      const isRecipeSaved = savedRecipesList?.some((savedRecipe: RecipeProps) => savedRecipe.id === recipe?.id);
 
-    const isRecipeSaved = savedRecipesList.some((savedRecipe: RecipeProps) => savedRecipe.id === recipe?.id);
-
-    if (!isRecipeSaved) {
-      const updatedRecipes = [recipe, ...savedRecipesList];
-      localStorage.setItem('saved-recipes', JSON.stringify(updatedRecipes));
-      setIsSaved(true);
-    } else {
-      alert('Recipe is already saved.');
-      setIsSaved(true);
+      if (!isRecipeSaved) {
+        const updatedRecipes = [recipe, ...(savedRecipesList || [])];
+        await localforage.setItem('saved-recipes', updatedRecipes);
+        setIsSaved(true);
+      } else {
+        alert('Recipe is already saved.');
+        setIsSaved(true);
+      }
+    } catch (error) {
+      console.error('Error saving recipe:', error);
     }
   };
 
-  const handleDeleteRecipe = () => {
-    const savedRecipesList = JSON.parse(localStorage.getItem('saved-recipes') || '[]');
+  const handleDeleteRecipe = async () => {
+    try {
+      const savedRecipesList: RecipeProps[] | null = await localforage.getItem('saved-recipes');
+      const updatedRecipes = savedRecipesList?.filter((recipe: RecipeProps) => `${recipe.id}` !== recipeId) || [];
 
-    const updatedRecipes = savedRecipesList.filter((recipe: RecipeProps) => `${recipe.id}` !== recipeId);
+      await localforage.setItem('saved-recipes', updatedRecipes);
 
-    localStorage.setItem('saved-recipes', JSON.stringify(updatedRecipes));
-
-    setIsSaved(false);
+      setIsSaved(false);
+    } catch (error) {
+      console.error('Error deleting recipe:', error);
+    }
   };
 
   const nutrientList = ['Fat', 'Carbohydrates', 'Protein', 'Sugar', 'Cholesterol', 'Fiber', 'Calcium'];

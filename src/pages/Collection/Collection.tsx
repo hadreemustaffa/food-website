@@ -2,30 +2,39 @@ import { useEffect, useState } from 'react';
 import { RecipeMinimalProps } from '@/interfaces';
 import { Button } from '@components/Button/Button';
 import { RecipeCardMinimal } from '@components/RecipeCard/RecipeCard';
+import localforage from 'localforage';
 
 export const Collection = () => {
   const [recipes, setRecipes] = useState<RecipeMinimalProps[]>([]);
 
   useEffect(() => {
-    const savedRecipesList = localStorage.getItem(`saved-recipes`);
+    const getRecipes = async () => {
+      try {
+        const savedRecipesList = await localforage.getItem<RecipeMinimalProps[]>('saved-recipes');
 
-    if (savedRecipesList) {
-      setRecipes(JSON.parse(savedRecipesList));
-    }
+        if (savedRecipesList) {
+          setRecipes(savedRecipesList);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getRecipes();
   }, []);
 
-  const handleDeleteRecipe = (id: number) => {
-    const savedRecipesList = JSON.parse(localStorage.getItem('saved-recipes') || '[]');
+  const handleDeleteRecipe = async (id: number) => {
+    const savedRecipesList = (await localforage.getItem<RecipeMinimalProps[]>('saved-recipes')) || [];
 
     const updatedRecipes = savedRecipesList.filter((recipe: RecipeMinimalProps) => recipe.id !== id);
 
-    localStorage.setItem('saved-recipes', JSON.stringify(updatedRecipes));
+    await localforage.setItem('saved-recipes', updatedRecipes);
 
     setRecipes(updatedRecipes);
   };
 
-  const handleDeleteAllRecipes = () => {
-    localStorage.setItem('saved-recipes', '');
+  const handleDeleteAllRecipes = async () => {
+    await localforage.removeItem('saved-recipes');
     setRecipes([]);
   };
 
