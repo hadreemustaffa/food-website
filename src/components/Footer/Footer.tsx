@@ -18,18 +18,17 @@ export const Footer = () => {
     <footer className='bg-black-950 text-white'>
       <div className='mx-auto flex w-full max-w-7xl flex-col items-center justify-between gap-4 p-4 text-center sm:flex-row sm:items-start sm:py-8 sm:text-left'>
         <div className='flex flex-col items-center gap-4 sm:items-start'>
-          <img width={96} height={32} src={logo} alt='site logo' />
+          <Link to='/' aria-label='Homepage'>
+            <img width={96} height={32} src={logo} alt='site logo' />
+          </Link>
 
           <ButtonIcon
             onClick={handleClick}
             className='border-2 border-tomato-200 px-4 py-2'
+            aria-label='Back to Top'
             title='Back to Top'
-          >
-            <FontAwesomeIcon
-              icon={faArrowUp}
-              className='text-white hover:text-tomato-300'
-            />
-          </ButtonIcon>
+            icon={faArrowUp}
+          />
         </div>
 
         <div className='flex flex-col gap-4'>
