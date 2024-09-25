@@ -12,7 +12,7 @@ const SearchInput = () => {
       id='search-form'
       role='search'
       method='get'
-      action='/explore'
+      action='/explore/search'
       className='mx-auto flex w-full max-w-xl flex-row justify-between rounded-sm border-[1px] border-tomato-300 py-2 pl-2'
     >
       <input
