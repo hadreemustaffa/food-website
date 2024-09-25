@@ -14,10 +14,10 @@ interface SearchProps {
 
 export async function loader({ request }: { request: Request }) {
   const url = new URL(request.url);
-  const query = url.searchParams.get('q') || '';
-  const formatQuery = decodeURIComponent(query.replace(/\+/g, ' '));
+  const params = url.searchParams.get('q') || '';
+  const query = decodeURIComponent(params.replace(/\+/g, ' '));
 
-  const recipes = getSearchRecipes(formatQuery);
+  const recipes = getSearchRecipes(query);
   return defer({ recipes, query });
 }
 
