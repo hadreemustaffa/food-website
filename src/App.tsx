@@ -8,6 +8,7 @@ import {
   RouterProvider,
   useRouteError,
 } from 'react-router-dom';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 import { Home } from './pages/Home/Home';
 import { Explore } from './pages/Explore/Explore';
@@ -87,7 +88,12 @@ const router = createBrowserRouter(
 );
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <RouterProvider router={router} />;
+      <SpeedInsights />
+    </>
+  );
 }
 
 export default App;
