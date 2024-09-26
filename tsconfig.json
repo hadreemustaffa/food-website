@@ -19,7 +19,7 @@
     "noUnusedParameters": true,
     "incremental": true,
     "noFallthroughCasesInSwitch": true,
-    "types": ["node", "vite/client", "vitest", "@testing-library/jest-dom"],
+    "types": ["node", "vite/client"],
     "baseUrl": "./src",
     "paths": {
       "@/*": ["*"],
