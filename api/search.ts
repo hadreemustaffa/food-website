@@ -1,8 +1,8 @@
 import axios from 'axios';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
-const API_URL = __API_URL__;
-const API_KEY = __API_KEY__;
+const API_URL = process.env.SPOONACULAR_API_URL;
+const API_KEY = process.env.SPOONACULAR_API_KEY;
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   const { q } = req.query;

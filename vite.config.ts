@@ -6,10 +6,6 @@ export default defineConfig({
   server: {
     port: process.env.PORT as unknown as number,
   },
-  define: {
-    __API_KEY__: JSON.stringify(process.env.SPOONACULAR_API_KEY),
-    __API_URL__: JSON.stringify(process.env.SPOONACULAR_API_URL),
-  },
   plugins: [react(), vercel()],
   resolve: {
     alias: {
