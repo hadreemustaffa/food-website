@@ -7,8 +7,8 @@ export default defineConfig({
     port: process.env.PORT as unknown as number,
   },
   define: {
-    __API_KEY__: process.env.SPOONACULAR_API_KEY,
-    __API_URL__: process.env.SPOONACULAR_API_URL,
+    __API_KEY__: JSON.stringify(process.env.SPOONACULAR_API_KEY),
+    __API_URL__: JSON.stringify(process.env.SPOONACULAR_API_URL),
   },
   plugins: [react(), vercel()],
   resolve: {
