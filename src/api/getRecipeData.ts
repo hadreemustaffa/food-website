@@ -1,14 +1,9 @@
 import axios, { AxiosResponse } from 'axios';
 
-const BASE_URL = 'https://api.spoonacular.com';
-const API_KEY = import.meta.env.VITE_API_KEY;
-
 export async function getRandomRecipe() {
   try {
-    const response: AxiosResponse = await axios.get(
-      `${BASE_URL}/recipes/random?apiKey=${API_KEY}&number=1`
-    );
-    return response.data.recipes[0];
+    const response: AxiosResponse = await axios.get('/api/random');
+    return response.data;
   } catch (error) {
     console.log(error);
     throw error;
@@ -17,10 +12,8 @@ export async function getRandomRecipe() {
 
 export const getFeaturedSectionRecipesId = async () => {
   try {
-    const response: AxiosResponse = await axios.get(
-      `${BASE_URL}/recipes/complexSearch?apiKey=${API_KEY}&instructionsRequired=true&fillIngredients=false&addRecipeInformation=false&addRecipeNutrition=false&maxReadyTime=20&ignorePantry=false&sort=meta-score&sortDirection=desc&number=4&limitLicense=true`
-    );
-    return response.data.results;
+    const response: AxiosResponse = await axios.get('/api/featured');
+    return response.data;
   } catch (error) {
     console.log(error);
     throw error;
@@ -29,10 +22,8 @@ export const getFeaturedSectionRecipesId = async () => {
 
 export const getPopularSectionRecipesId = async () => {
   try {
-    const response: AxiosResponse = await axios.get(
-      `${BASE_URL}/recipes/complexSearch?apiKey=${API_KEY}&type=main course&instructionsRequired=true&fillIngredients=false&addRecipeInformation=false&addRecipeNutrition=false&maxReadyTime=60&ignorePantry=false&sort=popularity&sortDirection=desc&number=4&limitLicense=true`
-    );
-    return response.data.results;
+    const response: AxiosResponse = await axios.get('/api/popular');
+    return response.data;
   } catch (error) {
     console.log(error);
     throw error;
@@ -41,10 +32,8 @@ export const getPopularSectionRecipesId = async () => {
 
 export const getExploreRecipesId = async () => {
   try {
-    const response: AxiosResponse = await axios.get(
-      `${BASE_URL}/recipes/random?apiKey=${API_KEY}&number=8`
-    );
-    return response.data.recipes;
+    const response: AxiosResponse = await axios.get('/api/explore');
+    return response.data;
   } catch (error) {
     console.log(error);
     throw error;
@@ -54,7 +43,7 @@ export const getExploreRecipesId = async () => {
 export const getDetailedRecipeInformation = async (recipeId: string) => {
   try {
     const response: AxiosResponse = await axios.get(
-      `${BASE_URL}/recipes/${recipeId}/information?apiKey=${API_KEY}&includeNutrition=true`
+      `/api/recipe?recipeId=${recipeId}`
     );
     return response.data;
   } catch (error) {
@@ -65,10 +54,8 @@ export const getDetailedRecipeInformation = async (recipeId: string) => {
 
 export const getSearchRecipes = async (query: string) => {
   try {
-    const response: AxiosResponse = await axios.get(
-      `${BASE_URL}/recipes/complexSearch?apiKey=${API_KEY}&query=${query}&type=main course&instructionsRequired=true&fillIngredients=false&addRecipeInformation=false&addRecipeNutrition=false&maxReadyTime=60&ignorePantry=false&sort=popularity&sortDirection=desc&number=4&limitLicense=true`
-    );
-    return response.data.results;
+    const response: AxiosResponse = await axios.get(`/api/search?q=${query}`);
+    return response.data;
   } catch (error) {
     console.log(error);
     throw error;

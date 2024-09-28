@@ -8,7 +8,7 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "module": "esnext",
-    "moduleResolution": "Bundler",
+    "moduleResolution": "Node",
     "isolatedModules": true,
     "resolveJsonModule": true,
     "noEmit": true,
@@ -27,6 +27,6 @@
       "@pages/*": ["pages/*"]
     }
   },
-  "include": ["src/**/*", "vite.config.ts"],
+  "include": ["src/**/*", "vite.config.ts", "api/*"],
   "exclude": ["node_modules", "build"]
 }
